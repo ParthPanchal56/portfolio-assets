@@ -1,0 +1,5312 @@
+File Number - 1 - basic-inputs.js
+---------------------------
+
+/*=========================================================================================
+        File Name: basic-inputs.js
+        Description: Input field js for label type
+        ----------------------------------------------------------------------------------------
+        Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+        Author: Pixinvent
+        Author URL: hhttp://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+(function(window, document, $) {
+    'use strict';
+    var $html = $('html');
+
+        //label Positions
+    $(".labelUp").labelinplace();
+    $(".labelDown").labelinplace({
+        labelPosition: "down"
+    });
+
+    // Label Icons
+    $(".labelIcon").labelinplace({
+        labelArrowRight: ' <i class="icon-hand-o-right"></i> ',
+        labelArrowDown: ' <i class="icon-hand-o-down"></i> ',
+        labelArrowUp: ' <i class="icon-hand-o-up"></i> '
+    });
+
+    // Icons After Label
+    $(".labelIconAfter").labelinplace({
+        labelArrowRight: ' <i class="icon-caret-right"></i> ',
+        labelArrowDown: ' <i class="icon-caret-down"></i> ',
+        labelArrowUp: ' <i class="icon-caret-up"></i> ',
+        labelIconPosition: "after",
+        inputAttr: "id"
+    });
+
+})(window, document, jQuery);
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 2 - basic-inputs.min.js
+---------------------------
+
+!function(l,i,a){"use strict";a("html");a(".labelUp").labelinplace(),a(".labelDown").labelinplace({labelPosition:"down"}),a(".labelIcon").labelinplace({labelArrowRight:' <i class="icon-hand-o-right"></i> ',labelArrowDown:' <i class="icon-hand-o-down"></i> ',labelArrowUp:' <i class="icon-hand-o-up"></i> '}),a(".labelIconAfter").labelinplace({labelArrowRight:' <i class="icon-caret-right"></i> ',labelArrowDown:' <i class="icon-caret-down"></i> ',labelArrowUp:' <i class="icon-caret-up"></i> ',labelIconPosition:"after",inputAttr:"id"})}(window,document,jQuery);
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 3 - form-maxlength.js
+---------------------------
+
+/*=========================================================================================
+	File Name: form-maxlength.js
+	Description: Bootstrap-Maxlength uses a Twitter Bootstrap label to show a visual
+		feedback to the user about the maximum length of the field where the user is
+		inserting text. Uses the HTML5 attribute "maxlength" to work.
+	----------------------------------------------------------------------------------------
+	Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+	Author: Pixinvent
+	Author URL: hhttp://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+(function (window, document, $) {
+  'use strict';
+
+  var $danger = "#ea5455";
+  var $primary = "#7367f0";
+  var $textcolor = "#4e5154";
+
+  $(".char-textarea").on("keyup", function (event) {
+    checkTextAreaMaxLength(this, event);
+    // to later change text color in dark layout
+    $(this).addClass("active")
+  });
+
+  /*
+  Checks the MaxLength of the Textarea
+  -----------------------------------------------------
+  @prerequisite:	textBox = textarea dom element
+          e = textarea event
+                  length = Max length of characters
+  */
+  function checkTextAreaMaxLength(textBox, e) {
+
+    var maxLength = parseInt($(textBox).data("length"));
+
+
+    if (!checkSpecialKeys(e)) {
+      if (textBox.value.length < maxLength - 1) textBox.value = textBox.value.substring(0, maxLength);
+    }
+    $(".char-count").html(textBox.value.length);
+
+    if (textBox.value.length > maxLength) {
+      $(".counter-value").css("background-color", $danger);
+      $(".char-textarea").css("color", $danger);
+      // to change text color after limit is maxedout out
+      $(".char-textarea").addClass("max-limit")
+    }
+    else {
+      $(".counter-value").css("background-color", $primary);
+      $(".char-textarea").css("color", $textcolor);
+      $(".char-textarea").removeClass("max-limit")
+
+    }
+
+    return true;
+  }
+  /*
+  Checks if the keyCode pressed is inside special chars
+  -------------------------------------------------------
+  @prerequisite:	e = e.keyCode object for the key pressed
+  */
+  function checkSpecialKeys(e) {
+    if (e.keyCode != 8 && e.keyCode != 46 && e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40)
+      return false;
+    else
+      return true;
+  }
+
+})(window, document, jQuery);
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 4 - form-maxlength.min.js
+---------------------------
+
+!function(e,a,r){"use strict";var o="#ea5455";r(".char-textarea").on("keyup",function(e){!function(e,a){var t=parseInt(r(e).data("length"));(function(e){return 8==e.keyCode||46==e.keyCode||37==e.keyCode||38==e.keyCode||39==e.keyCode||40==e.keyCode})(a)||e.value.length<t-1&&(e.value=e.value.substring(0,t));r(".char-count").html(e.value.length),e.value.length>t?(r(".counter-value").css("background-color",o),r(".char-textarea").css("color",o),r(".char-textarea").addClass("max-limit")):(r(".counter-value").css("background-color","#7367f0"),r(".char-textarea").css("color","#4e5154"),r(".char-textarea").removeClass("max-limit"))}(this,e),r(this).addClass("active")})}(window,document,jQuery);
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 5 - form-tooltip-valid.js
+---------------------------
+
+/*=========================================================================================
+    File Name: form-tooltip-valid.js
+    Description: form tooltip validation etc..
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: Pixinvent
+    Author URL: hhttp://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+(function(window, document, $) {
+  'use strict';
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  // Loop over them and prevent submission
+  $("button").click(function () {
+    var form = $(".needs-validation");
+    if (form[0].checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    form.addClass('was-validated');
+  });
+
+})(window, document, jQuery);
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 6 - form-tooltip-valid.min.js
+---------------------------
+
+!function(t,e,n){"use strict";n("button").click(function(){var t=n(".needs-validation");!1===t[0].checkValidity()&&(event.preventDefault(),event.stopPropagation()),t.addClass("was-validated")})}(window,document,jQuery);
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 7 - number-input.js
+---------------------------
+
+/*=========================================================================================
+	File Name: input-groups.js
+	Description: Input Groups js
+	----------------------------------------------------------------------------------------
+	Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+(function (window, document, $) {
+  'use strict';
+  var $html = $('html');
+
+  // Default Spin
+  $(".touchspin").TouchSpin({
+    buttondown_class: "btn btn-primary",
+    buttonup_class: "btn btn-primary",
+  });
+
+  // Icon Change
+  $(".touchspin-icon").TouchSpin({
+    buttondown_txt: '<i class="feather icon-chevron-down"></i>',
+    buttonup_txt: '<i class="feather icon-chevron-up"></i>'
+  });
+
+  // Min - Max
+
+  var touchspinValue = $(".touchspin-min-max"),
+    counterMin = 15,
+    counterMax = 21;
+  if (touchspinValue.length > 0) {
+    touchspinValue.TouchSpin({
+      min: counterMin,
+      max: counterMax
+    }).on('touchspin.on.startdownspin', function () {
+      var $this = $(this);
+      $('.bootstrap-touchspin-up').removeClass("disabled-max-min");
+      if ($this.val() == counterMin) {
+        $(this).siblings().find('.bootstrap-touchspin-down').addClass("disabled-max-min");
+      }
+    }).on('touchspin.on.startupspin', function () {
+      var $this = $(this);
+      $('.bootstrap-touchspin-down').removeClass("disabled-max-min");
+      if ($this.val() == counterMax) {
+        $(this).siblings().find('.bootstrap-touchspin-up').addClass("disabled-max-min");
+      }
+    });
+  }
+
+
+  // Step
+  $(".touchspin-step").TouchSpin({
+    step: 5
+  });
+
+  // Color Options
+  $(".touchspin-color").each(function (index) {
+    var down = "btn btn-primary",
+      up = "btn btn-primary",
+      $this = $(this);
+    if ($this.data('bts-button-down-class')) {
+      down = $this.data('bts-button-down-class');
+    }
+    if ($this.data('bts-button-up-class')) {
+      up = $this.data('bts-button-up-class');
+    }
+    $this.TouchSpin({
+      mousewheel: false,
+      buttondown_class: down,
+      buttonup_class: up,
+      buttondown_txt: '<i class="feather icon-minus"></i>',
+      buttonup_txt: '<i class="feather icon-plus"></i>'
+    });
+  });
+
+})(window, document, jQuery);
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 8 - number-input.min.js
+---------------------------
+
+!function(t,n,i){"use strict";i("html");i(".touchspin").TouchSpin({buttondown_class:"btn btn-primary",buttonup_class:"btn btn-primary"}),i(".touchspin-icon").TouchSpin({buttondown_txt:'<i class="feather icon-chevron-down"></i>',buttonup_txt:'<i class="feather icon-chevron-up"></i>'});var s=i(".touchspin-min-max");0<s.length&&s.TouchSpin({min:15,max:21}).on("touchspin.on.startdownspin",function(){var t=i(this);i(".bootstrap-touchspin-up").removeClass("disabled-max-min"),15==t.val()&&i(this).siblings().find(".bootstrap-touchspin-down").addClass("disabled-max-min")}).on("touchspin.on.startupspin",function(){var t=i(this);i(".bootstrap-touchspin-down").removeClass("disabled-max-min"),21==t.val()&&i(this).siblings().find(".bootstrap-touchspin-up").addClass("disabled-max-min")}),i(".touchspin-step").TouchSpin({step:5}),i(".touchspin-color").each(function(t){var n="btn btn-primary",s="btn btn-primary",o=i(this);o.data("bts-button-down-class")&&(n=o.data("bts-button-down-class")),o.data("bts-button-up-class")&&(s=o.data("bts-button-up-class")),o.TouchSpin({mousewheel:!1,buttondown_class:n,buttonup_class:s,buttondown_txt:'<i class="feather icon-minus"></i>',buttonup_txt:'<i class="feather icon-plus"></i>'})})}(window,document,jQuery);
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 9 - wizard-steps.js
+---------------------------
+
+/*=========================================================================================
+    File Name: wizard-steps.js
+    Description: wizard steps page specific js
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+// Wizard tabs with numbers setup
+$(".number-tab-steps").steps({
+    headerTag: "h6",
+    bodyTag: "fieldset",
+    transitionEffect: "fade",
+    titleTemplate: '<span class="step">#index#</span> #title#',
+    labels: {
+        finish: 'Submit'
+    },
+    onFinished: function (event, currentIndex) {
+        alert("Form submitted.");
+    }
+});
+
+// Wizard tabs with icons setup
+$(".icons-tab-steps").steps({
+    headerTag: "h6",
+    bodyTag: "fieldset",
+    transitionEffect: "fade",
+    titleTemplate: '<span class="step">#index#</span> #title#',
+    labels: {
+        finish: 'Submit'
+    },
+    onFinished: function (event, currentIndex) {
+        alert("Form submitted.");
+    }
+});
+
+// Validate steps wizard
+
+// Show form
+var form = $(".steps-validation").show();
+
+$(".steps-validation").steps({
+    headerTag: "h6",
+    bodyTag: "fieldset",
+    transitionEffect: "fade",
+    titleTemplate: '<span class="step">#index#</span> #title#',
+    labels: {
+        finish: 'Submit'
+    },
+    onStepChanging: function (event, currentIndex, newIndex) {
+        // Allways allow previous action even if the current form is not valid!
+        if (currentIndex > newIndex) {
+            return true;
+        }
+
+        // Needed in some cases if the user went back (clean up)
+        if (currentIndex < newIndex) {
+            // To remove error styles
+            form.find(".body:eq(" + newIndex + ") label.error").remove();
+            form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
+        }
+        form.validate().settings.ignore = ":disabled,:hidden";
+        return form.valid();
+    },
+    onFinishing: function (event, currentIndex) {
+        form.validate().settings.ignore = ":disabled";
+        return form.valid();
+    },
+    onFinished: function (event, currentIndex) {
+        alert("Submitted!");
+    }
+});
+
+// Initialize validation
+$(".steps-validation").validate({
+    ignore: 'input[type=hidden]', // ignore hidden fields
+    errorClass: 'danger',
+    successClass: 'success',
+    highlight: function (element, errorClass) {
+        $(element).removeClass(errorClass);
+    },
+    unhighlight: function (element, errorClass) {
+        $(element).removeClass(errorClass);
+    },
+    errorPlacement: function (error, element) {
+        error.insertAfter(element);
+    },
+    rules: {
+        email: {
+            email: true
+        }
+    }
+});
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 10 - wizard-steps.min.js
+---------------------------
+
+$(".number-tab-steps").steps({headerTag:"h6",bodyTag:"fieldset",transitionEffect:"fade",titleTemplate:'<span class="step">#index#</span> #title#',labels:{finish:"Submit"},onFinished:function(e,t){alert("Form submitted.")}}),$(".icons-tab-steps").steps({headerTag:"h6",bodyTag:"fieldset",transitionEffect:"fade",titleTemplate:'<span class="step">#index#</span> #title#',labels:{finish:"Submit"},onFinished:function(e,t){alert("Form submitted.")}});var form=$(".steps-validation").show();$(".steps-validation").steps({headerTag:"h6",bodyTag:"fieldset",transitionEffect:"fade",titleTemplate:'<span class="step">#index#</span> #title#',labels:{finish:"Submit"},onStepChanging:function(e,t,i){return i<t||(t<i&&(form.find(".body:eq("+i+") label.error").remove(),form.find(".body:eq("+i+") .error").removeClass("error")),form.validate().settings.ignore=":disabled,:hidden",form.valid())},onFinishing:function(e,t){return form.validate().settings.ignore=":disabled",form.valid()},onFinished:function(e,t){alert("Submitted!")}}),$(".steps-validation").validate({ignore:"input[type=hidden]",errorClass:"danger",successClass:"success",highlight:function(e,t){$(e).removeClass(t)},unhighlight:function(e,t){$(e).removeClass(t)},errorPlacement:function(e,t){e.insertAfter(t)},rules:{email:{email:!0}}});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 1 - form-select2.js
+---------------------------
+
+/*=========================================================================================
+    File Name: form-select2.js
+    Description: Select2 is a jQuery-based replacement for select boxes.
+    It supports searching, remote data sets, and pagination of results.
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: Pixinvent
+    Author URL: hhttp://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+(function(window, document, $) {
+	'use strict';
+
+  // Basic Select2 select
+	$(".select2").select2({
+    // the following code is used to disable x-scrollbar when click in select input and
+    // take 100% width in responsive also
+    dropdownAutoWidth: true,
+    width: '100%'
+  });
+
+    // Select With Icon
+    $(".select2-icons").select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        minimumResultsForSearch: Infinity,
+        templateResult: iconFormat,
+        templateSelection: iconFormat,
+        escapeMarkup: function(es) { return es; }
+    });
+
+    // Format icon
+    function iconFormat(icon) {
+        var originalOption = icon.element;
+        if (!icon.id) { return icon.text; }
+        var $icon = "<i class='" + $(icon.element).data('icon') + "'></i>" + icon.text;
+
+        return $icon;
+    }
+
+
+    // Limiting the number of selections
+    $(".max-length").select2({
+      dropdownAutoWidth: true,
+      width: '100%',
+      maximumSelectionLength: 2,
+      placeholder: "Select maximum 2 items"
+    });
+
+
+    // Programmatic access
+    var $select = $(".js-example-programmatic").select2({
+      dropdownAutoWidth: true,
+      width: '100%'
+    });
+    var $selectMulti = $(".js-example-programmatic-multi").select2();
+    $selectMulti.select2({
+      dropdownAutoWidth: true,
+      width: '100%',
+      placeholder: "Programmatic Events"
+    });
+    $(".js-programmatic-set-val").on("click", function () { $select.val("CA").trigger("change"); });
+
+    $(".js-programmatic-open").on("click", function () { $select.select2("open"); });
+    $(".js-programmatic-close").on("click", function () { $select.select2("close"); });
+
+    $(".js-programmatic-init").on("click", function () { $select.select2(); });
+    $(".js-programmatic-destroy").on("click", function () { $select.select2("destroy"); });
+
+    $(".js-programmatic-multi-set-val").on("click", function () { $selectMulti.val(["CA", "AL"]).trigger("change"); });
+    $(".js-programmatic-multi-clear").on("click", function () { $selectMulti.val(null).trigger("change"); });
+
+    // Loading array data
+    var data = [
+        { id: 0, text: 'enhancement' },
+        { id: 1, text: 'bug' },
+        { id: 2, text: 'duplicate' },
+        { id: 3, text: 'invalid' },
+        { id: 4, text: 'wontfix' }
+    ];
+
+    $(".select2-data-array").select2({
+      dropdownAutoWidth: true,
+      width: '100%',
+      data: data
+    });
+
+    // Loading remote data
+    $(".select2-data-ajax").select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        ajax: {
+        url: "https://api.github.com/search/repositories",
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+          return {
+            q: params.term, // search term
+            page: params.page
+          };
+        },
+        processResults: function (data, params) {
+          // parse the results into the format expected by Select2
+          // since we are using custom formatting functions we do not need to
+          // alter the remote JSON data, except to indicate that infinite
+          // scrolling can be used
+          params.page = params.page || 1;
+
+          return {
+            results: data.items,
+            pagination: {
+              more: (params.page * 30) < data.total_count
+            }
+          };
+        },
+        cache: true
+      },
+      placeholder: 'Search for a repository',
+      escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+      minimumInputLength: 1,
+      templateResult: formatRepo,
+      templateSelection: formatRepoSelection
+  });
+
+    function formatRepo (repo) {
+      if (repo.loading) return repo.text;
+
+      var markup = "<div class='select2-result-repository clearfix'>" +
+        "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" +
+        "<div class='select2-result-repository__meta'>" +
+          "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
+
+      if (repo.description) {
+        markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
+      }
+
+      markup += "<div class='select2-result-repository__statistics'>" +
+        "<div class='select2-result-repository__forks'><i class='icon-code-fork mr-0'></i> " + repo.forks_count + " Forks</div>" +
+        "<div class='select2-result-repository__stargazers'><i class='icon-star5 mr-0'></i> " + repo.stargazers_count + " Stars</div>" +
+        "<div class='select2-result-repository__watchers'><i class='icon-eye mr-0'></i> " + repo.watchers_count + " Watchers</div>" +
+      "</div>" +
+      "</div></div>";
+
+      return markup;
+    }
+
+    function formatRepoSelection (repo) {
+      return repo.full_name || repo.text;
+    }
+
+
+    // Customizing how results are matched
+    function matchStart (term, text) {
+      if (text.toUpperCase().indexOf(term.toUpperCase()) === 0) {
+        return true;
+      }
+
+      return false;
+    }
+
+    $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+      $(".select2-customize-result").select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        placeholder: "Search by 'r'",
+        matcher: oldMatcher(matchStart)
+      });
+    });
+
+    // Theme support
+    $(".select2-theme").select2({
+      dropdownAutoWidth: true,
+      width: '100%',
+      placeholder: "Classic Theme",
+      theme: "classic"
+    });
+
+
+    // Sizing options
+
+    // Large
+    $('.select2-size-lg').select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        containerCssClass: 'select-lg'
+    });
+
+    // Small
+    $('.select2-size-sm').select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        containerCssClass: 'select-sm'
+    });
+
+    // Color Options
+
+    // Background Color
+    $('.select2-bg').each(function(i, obj) {
+      var variation = "",
+      textVariation = "",
+      textColor = "";
+      var color = $(this).data('bgcolor');
+      variation = $(this).data('bgcolor-variation');
+      textVariation = $(this).data('text-variation');
+      textColor = $(this).data('text-color');
+      if(textVariation !== ""){
+        textVariation = " "+textVariation;
+      }
+      if(variation !== ""){
+        variation = " bg-"+variation;
+      }
+      var className = "bg-"+color + variation + " " + textColor + textVariation + " border-"+color + ' border-darken-2 ';
+
+      $(this).select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        containerCssClass: className
+      });
+    });
+
+    // Border Color
+    $('.select2-border').each(function(i, obj) {
+      var variation = "",
+      textVariation = "",
+      textColor = "";
+      var color = $(this).data('border-color');
+      textVariation = $(this).data('text-variation');
+      variation = $(this).data('border-variation');
+      textColor = $(this).data('text-color');
+      if(textVariation !== ""){
+        textVariation = " "+textVariation;
+      }
+      if(variation !== ""){
+        variation = " border-"+variation;
+      }
+
+      var className = "border-"+color + " " +variation + " " + textColor + textVariation;
+
+      $(this).select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        containerCssClass: className
+      });
+    });
+
+    // Full Background Color
+    $('.select2-full-bg').each(function(i, obj) {
+      var variation = "",
+      textVariation = "",
+      textColor = "";
+      var color = $(this).data('bgcolor');
+      variation = $(this).data('bgcolor-variation');
+      textVariation = $(this).data('text-variation');
+      textColor = $(this).data('text-color');
+      if(variation !== ""){
+        variation = " bg-"+variation;
+      }
+      if(textVariation !== ""){
+        textVariation = " "+textVariation;
+      }
+      var className = "bg-"+color + variation + " " + textColor + textVariation + " border-"+color + ' border-darken-2 ';
+
+      $(this).select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        containerCssClass: className,
+        dropdownCssClass: className
+      });
+    });
+
+    $('select[data-text-color]').each(function(i, obj) {
+      var text = $(this).data('text-color'),textVariation;
+      textVariation = $(this).data('text-variation');
+      if(textVariation !== ""){
+        textVariation = " "+textVariation;
+      }
+      $(this).next(".select2").find(".select2-selection__rendered").addClass(text+textVariation);
+    });
+
+})(window, document, jQuery);
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 2 - form-select2.min.js
+---------------------------
+
+!function(t,e,o){"use strict";function s(t){t.element;return t.id?"<i class='"+o(t.element).data("icon")+"'></i>"+t.text:t.text}o(".select2").select2({dropdownAutoWidth:!0,width:"100%"}),o(".select2-icons").select2({dropdownAutoWidth:!0,width:"100%",minimumResultsForSearch:1/0,templateResult:s,templateSelection:s,escapeMarkup:function(t){return t}}),o(".max-length").select2({dropdownAutoWidth:!0,width:"100%",maximumSelectionLength:2,placeholder:"Select maximum 2 items"});var i=o(".js-example-programmatic").select2({dropdownAutoWidth:!0,width:"100%"}),r=o(".js-example-programmatic-multi").select2();r.select2({dropdownAutoWidth:!0,width:"100%",placeholder:"Programmatic Events"}),o(".js-programmatic-set-val").on("click",function(){i.val("CA").trigger("change")}),o(".js-programmatic-open").on("click",function(){i.select2("open")}),o(".js-programmatic-close").on("click",function(){i.select2("close")}),o(".js-programmatic-init").on("click",function(){i.select2()}),o(".js-programmatic-destroy").on("click",function(){i.select2("destroy")}),o(".js-programmatic-multi-set-val").on("click",function(){r.val(["CA","AL"]).trigger("change")}),o(".js-programmatic-multi-clear").on("click",function(){r.val(null).trigger("change")});function a(t,e){return 0===e.toUpperCase().indexOf(t.toUpperCase())}o(".select2-data-array").select2({dropdownAutoWidth:!0,width:"100%",data:[{id:0,text:"enhancement"},{id:1,text:"bug"},{id:2,text:"duplicate"},{id:3,text:"invalid"},{id:4,text:"wontfix"}]}),o(".select2-data-ajax").select2({dropdownAutoWidth:!0,width:"100%",ajax:{url:"https://api.github.com/search/repositories",dataType:"json",delay:250,data:function(t){return{q:t.term,page:t.page}},processResults:function(t,e){return e.page=e.page||1,{results:t.items,pagination:{more:30*e.page<t.total_count}}},cache:!0},placeholder:"Search for a repository",escapeMarkup:function(t){return t},minimumInputLength:1,templateResult:function(t){if(t.loading)return t.text;var e="<div class='select2-result-repository clearfix'><div class='select2-result-repository__avatar'><img src='"+t.owner.avatar_url+"' /></div><div class='select2-result-repository__meta'><div class='select2-result-repository__title'>"+t.full_name+"</div>";t.description&&(e+="<div class='select2-result-repository__description'>"+t.description+"</div>");return e+="<div class='select2-result-repository__statistics'><div class='select2-result-repository__forks'><i class='icon-code-fork mr-0'></i> "+t.forks_count+" Forks</div><div class='select2-result-repository__stargazers'><i class='icon-star5 mr-0'></i> "+t.stargazers_count+" Stars</div><div class='select2-result-repository__watchers'><i class='icon-eye mr-0'></i> "+t.watchers_count+" Watchers</div></div></div></div>"},templateSelection:function(t){return t.full_name||t.text}}),o.fn.select2.amd.require(["select2/compat/matcher"],function(t){o(".select2-customize-result").select2({dropdownAutoWidth:!0,width:"100%",placeholder:"Search by 'r'",matcher:t(a)})}),o(".select2-theme").select2({dropdownAutoWidth:!0,width:"100%",placeholder:"Classic Theme",theme:"classic"}),o(".select2-size-lg").select2({dropdownAutoWidth:!0,width:"100%",containerCssClass:"select-lg"}),o(".select2-size-sm").select2({dropdownAutoWidth:!0,width:"100%",containerCssClass:"select-sm"}),o(".select2-bg").each(function(t,e){var s="",i="",r=o(this).data("bgcolor");s=o(this).data("bgcolor-variation"),""!==(i=o(this).data("text-variation"))&&(i=" "+i),""!==s&&(s=" bg-"+s);var a="bg-"+r+s+" "+o(this).data("text-color")+i+" border-"+r+" border-darken-2 ";o(this).select2({dropdownAutoWidth:!0,width:"100%",containerCssClass:a})}),o(".select2-border").each(function(t,e){var s="",i="",r=o(this).data("border-color");""!==(i=o(this).data("text-variation"))&&(i=" "+i),""!==(s=o(this).data("border-variation"))&&(s=" border-"+s);var a="border-"+r+" "+s+" "+o(this).data("text-color")+i;o(this).select2({dropdownAutoWidth:!0,width:"100%",containerCssClass:a})}),o(".select2-full-bg").each(function(t,e){var s="",i="",r=o(this).data("bgcolor");""!==(s=o(this).data("bgcolor-variation"))&&(s=" bg-"+s),""!==(i=o(this).data("text-variation"))&&(i=" "+i);var a="bg-"+r+s+" "+o(this).data("text-color")+i+" border-"+r+" border-darken-2 ";o(this).select2({dropdownAutoWidth:!0,width:"100%",containerCssClass:a,dropdownCssClass:a})}),o("select[data-text-color]").each(function(t,e){var s,i=o(this).data("text-color");""!==(s=o(this).data("text-variation"))&&(s=" "+s),o(this).next(".select2").find(".select2-selection__rendered").addClass(i+s)})}(window,document,jQuery);
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 1 - form-validation.js
+---------------------------
+
+/*=========================================================================================
+  File Name: form-validation.js
+  Description: jquery bootsreap validation js
+  ----------------------------------------------------------------------------------------
+  Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+  Author: PIXINVENT
+  Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+(function(window, document, $) {
+  'use strict';
+
+  // Input, Select, Textarea validations except submit button
+  $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+
+})(window, document, jQuery);
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 2 - form-validation.min.js
+---------------------------
+
+!function(){"use strict";jQuery("input,select,textarea").not("[type=submit]").jqBootstrapValidation()}(window,document);
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 1 - form-select2.js
+---------------------------
+
+/*=========================================================================================
+    File Name: form-select2.js
+    Description: Select2 is a jQuery-based replacement for select boxes.
+    It supports searching, remote data sets, and pagination of results.
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: Pixinvent
+    Author URL: hhttp://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+(function(window, document, $) {
+	'use strict';
+
+  // Basic Select2 select
+	$(".select2").select2({
+    // the following code is used to disable x-scrollbar when click in select input and
+    // take 100% width in responsive also
+    dropdownAutoWidth: true,
+    width: '100%'
+  });
+
+    // Select With Icon
+    $(".select2-icons").select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        minimumResultsForSearch: Infinity,
+        templateResult: iconFormat,
+        templateSelection: iconFormat,
+        escapeMarkup: function(es) { return es; }
+    });
+
+    // Format icon
+    function iconFormat(icon) {
+        var originalOption = icon.element;
+        if (!icon.id) { return icon.text; }
+        var $icon = "<i class='" + $(icon.element).data('icon') + "'></i>" + icon.text;
+
+        return $icon;
+    }
+
+
+    // Limiting the number of selections
+    $(".max-length").select2({
+      dropdownAutoWidth: true,
+      width: '100%',
+      maximumSelectionLength: 2,
+      placeholder: "Select maximum 2 items"
+    });
+
+
+    // Programmatic access
+    var $select = $(".js-example-programmatic").select2({
+      dropdownAutoWidth: true,
+      width: '100%'
+    });
+    var $selectMulti = $(".js-example-programmatic-multi").select2();
+    $selectMulti.select2({
+      dropdownAutoWidth: true,
+      width: '100%',
+      placeholder: "Programmatic Events"
+    });
+    $(".js-programmatic-set-val").on("click", function () { $select.val("CA").trigger("change"); });
+
+    $(".js-programmatic-open").on("click", function () { $select.select2("open"); });
+    $(".js-programmatic-close").on("click", function () { $select.select2("close"); });
+
+    $(".js-programmatic-init").on("click", function () { $select.select2(); });
+    $(".js-programmatic-destroy").on("click", function () { $select.select2("destroy"); });
+
+    $(".js-programmatic-multi-set-val").on("click", function () { $selectMulti.val(["CA", "AL"]).trigger("change"); });
+    $(".js-programmatic-multi-clear").on("click", function () { $selectMulti.val(null).trigger("change"); });
+
+    // Loading array data
+    var data = [
+        { id: 0, text: 'enhancement' },
+        { id: 1, text: 'bug' },
+        { id: 2, text: 'duplicate' },
+        { id: 3, text: 'invalid' },
+        { id: 4, text: 'wontfix' }
+    ];
+
+    $(".select2-data-array").select2({
+      dropdownAutoWidth: true,
+      width: '100%',
+      data: data
+    });
+
+    // Loading remote data
+    $(".select2-data-ajax").select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        ajax: {
+        url: "https://api.github.com/search/repositories",
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+          return {
+            q: params.term, // search term
+            page: params.page
+          };
+        },
+        processResults: function (data, params) {
+          // parse the results into the format expected by Select2
+          // since we are using custom formatting functions we do not need to
+          // alter the remote JSON data, except to indicate that infinite
+          // scrolling can be used
+          params.page = params.page || 1;
+
+          return {
+            results: data.items,
+            pagination: {
+              more: (params.page * 30) < data.total_count
+            }
+          };
+        },
+        cache: true
+      },
+      placeholder: 'Search for a repository',
+      escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+      minimumInputLength: 1,
+      templateResult: formatRepo,
+      templateSelection: formatRepoSelection
+  });
+
+    function formatRepo (repo) {
+      if (repo.loading) return repo.text;
+
+      var markup = "<div class='select2-result-repository clearfix'>" +
+        "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" +
+        "<div class='select2-result-repository__meta'>" +
+          "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
+
+      if (repo.description) {
+        markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
+      }
+
+      markup += "<div class='select2-result-repository__statistics'>" +
+        "<div class='select2-result-repository__forks'><i class='icon-code-fork mr-0'></i> " + repo.forks_count + " Forks</div>" +
+        "<div class='select2-result-repository__stargazers'><i class='icon-star5 mr-0'></i> " + repo.stargazers_count + " Stars</div>" +
+        "<div class='select2-result-repository__watchers'><i class='icon-eye mr-0'></i> " + repo.watchers_count + " Watchers</div>" +
+      "</div>" +
+      "</div></div>";
+
+      return markup;
+    }
+
+    function formatRepoSelection (repo) {
+      return repo.full_name || repo.text;
+    }
+
+
+    // Customizing how results are matched
+    function matchStart (term, text) {
+      if (text.toUpperCase().indexOf(term.toUpperCase()) === 0) {
+        return true;
+      }
+
+      return false;
+    }
+
+    $.fn.select2.amd.require(['select2/compat/matcher'], function (oldMatcher) {
+      $(".select2-customize-result").select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        placeholder: "Search by 'r'",
+        matcher: oldMatcher(matchStart)
+      });
+    });
+
+    // Theme support
+    $(".select2-theme").select2({
+      dropdownAutoWidth: true,
+      width: '100%',
+      placeholder: "Classic Theme",
+      theme: "classic"
+    });
+
+
+    // Sizing options
+
+    // Large
+    $('.select2-size-lg').select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        containerCssClass: 'select-lg'
+    });
+
+    // Small
+    $('.select2-size-sm').select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        containerCssClass: 'select-sm'
+    });
+
+    // Color Options
+
+    // Background Color
+    $('.select2-bg').each(function(i, obj) {
+      var variation = "",
+      textVariation = "",
+      textColor = "";
+      var color = $(this).data('bgcolor');
+      variation = $(this).data('bgcolor-variation');
+      textVariation = $(this).data('text-variation');
+      textColor = $(this).data('text-color');
+      if(textVariation !== ""){
+        textVariation = " "+textVariation;
+      }
+      if(variation !== ""){
+        variation = " bg-"+variation;
+      }
+      var className = "bg-"+color + variation + " " + textColor + textVariation + " border-"+color + ' border-darken-2 ';
+
+      $(this).select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        containerCssClass: className
+      });
+    });
+
+    // Border Color
+    $('.select2-border').each(function(i, obj) {
+      var variation = "",
+      textVariation = "",
+      textColor = "";
+      var color = $(this).data('border-color');
+      textVariation = $(this).data('text-variation');
+      variation = $(this).data('border-variation');
+      textColor = $(this).data('text-color');
+      if(textVariation !== ""){
+        textVariation = " "+textVariation;
+      }
+      if(variation !== ""){
+        variation = " border-"+variation;
+      }
+
+      var className = "border-"+color + " " +variation + " " + textColor + textVariation;
+
+      $(this).select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        containerCssClass: className
+      });
+    });
+
+    // Full Background Color
+    $('.select2-full-bg').each(function(i, obj) {
+      var variation = "",
+      textVariation = "",
+      textColor = "";
+      var color = $(this).data('bgcolor');
+      variation = $(this).data('bgcolor-variation');
+      textVariation = $(this).data('text-variation');
+      textColor = $(this).data('text-color');
+      if(variation !== ""){
+        variation = " bg-"+variation;
+      }
+      if(textVariation !== ""){
+        textVariation = " "+textVariation;
+      }
+      var className = "bg-"+color + variation + " " + textColor + textVariation + " border-"+color + ' border-darken-2 ';
+
+      $(this).select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        containerCssClass: className,
+        dropdownCssClass: className
+      });
+    });
+
+    $('select[data-text-color]').each(function(i, obj) {
+      var text = $(this).data('text-color'),textVariation;
+      textVariation = $(this).data('text-variation');
+      if(textVariation !== ""){
+        textVariation = " "+textVariation;
+      }
+      $(this).next(".select2").find(".select2-selection__rendered").addClass(text+textVariation);
+    });
+
+})(window, document, jQuery);
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 2 - form-select2.min.js
+---------------------------
+
+!function(t,e,o){"use strict";function s(t){t.element;return t.id?"<i class='"+o(t.element).data("icon")+"'></i>"+t.text:t.text}o(".select2").select2({dropdownAutoWidth:!0,width:"100%"}),o(".select2-icons").select2({dropdownAutoWidth:!0,width:"100%",minimumResultsForSearch:1/0,templateResult:s,templateSelection:s,escapeMarkup:function(t){return t}}),o(".max-length").select2({dropdownAutoWidth:!0,width:"100%",maximumSelectionLength:2,placeholder:"Select maximum 2 items"});var i=o(".js-example-programmatic").select2({dropdownAutoWidth:!0,width:"100%"}),r=o(".js-example-programmatic-multi").select2();r.select2({dropdownAutoWidth:!0,width:"100%",placeholder:"Programmatic Events"}),o(".js-programmatic-set-val").on("click",function(){i.val("CA").trigger("change")}),o(".js-programmatic-open").on("click",function(){i.select2("open")}),o(".js-programmatic-close").on("click",function(){i.select2("close")}),o(".js-programmatic-init").on("click",function(){i.select2()}),o(".js-programmatic-destroy").on("click",function(){i.select2("destroy")}),o(".js-programmatic-multi-set-val").on("click",function(){r.val(["CA","AL"]).trigger("change")}),o(".js-programmatic-multi-clear").on("click",function(){r.val(null).trigger("change")});function a(t,e){return 0===e.toUpperCase().indexOf(t.toUpperCase())}o(".select2-data-array").select2({dropdownAutoWidth:!0,width:"100%",data:[{id:0,text:"enhancement"},{id:1,text:"bug"},{id:2,text:"duplicate"},{id:3,text:"invalid"},{id:4,text:"wontfix"}]}),o(".select2-data-ajax").select2({dropdownAutoWidth:!0,width:"100%",ajax:{url:"https://api.github.com/search/repositories",dataType:"json",delay:250,data:function(t){return{q:t.term,page:t.page}},processResults:function(t,e){return e.page=e.page||1,{results:t.items,pagination:{more:30*e.page<t.total_count}}},cache:!0},placeholder:"Search for a repository",escapeMarkup:function(t){return t},minimumInputLength:1,templateResult:function(t){if(t.loading)return t.text;var e="<div class='select2-result-repository clearfix'><div class='select2-result-repository__avatar'><img src='"+t.owner.avatar_url+"' /></div><div class='select2-result-repository__meta'><div class='select2-result-repository__title'>"+t.full_name+"</div>";t.description&&(e+="<div class='select2-result-repository__description'>"+t.description+"</div>");return e+="<div class='select2-result-repository__statistics'><div class='select2-result-repository__forks'><i class='icon-code-fork mr-0'></i> "+t.forks_count+" Forks</div><div class='select2-result-repository__stargazers'><i class='icon-star5 mr-0'></i> "+t.stargazers_count+" Stars</div><div class='select2-result-repository__watchers'><i class='icon-eye mr-0'></i> "+t.watchers_count+" Watchers</div></div></div></div>"},templateSelection:function(t){return t.full_name||t.text}}),o.fn.select2.amd.require(["select2/compat/matcher"],function(t){o(".select2-customize-result").select2({dropdownAutoWidth:!0,width:"100%",placeholder:"Search by 'r'",matcher:t(a)})}),o(".select2-theme").select2({dropdownAutoWidth:!0,width:"100%",placeholder:"Classic Theme",theme:"classic"}),o(".select2-size-lg").select2({dropdownAutoWidth:!0,width:"100%",containerCssClass:"select-lg"}),o(".select2-size-sm").select2({dropdownAutoWidth:!0,width:"100%",containerCssClass:"select-sm"}),o(".select2-bg").each(function(t,e){var s="",i="",r=o(this).data("bgcolor");s=o(this).data("bgcolor-variation"),""!==(i=o(this).data("text-variation"))&&(i=" "+i),""!==s&&(s=" bg-"+s);var a="bg-"+r+s+" "+o(this).data("text-color")+i+" border-"+r+" border-darken-2 ";o(this).select2({dropdownAutoWidth:!0,width:"100%",containerCssClass:a})}),o(".select2-border").each(function(t,e){var s="",i="",r=o(this).data("border-color");""!==(i=o(this).data("text-variation"))&&(i=" "+i),""!==(s=o(this).data("border-variation"))&&(s=" border-"+s);var a="border-"+r+" "+s+" "+o(this).data("text-color")+i;o(this).select2({dropdownAutoWidth:!0,width:"100%",containerCssClass:a})}),o(".select2-full-bg").each(function(t,e){var s="",i="",r=o(this).data("bgcolor");""!==(s=o(this).data("bgcolor-variation"))&&(s=" bg-"+s),""!==(i=o(this).data("text-variation"))&&(i=" "+i);var a="bg-"+r+s+" "+o(this).data("text-color")+i+" border-"+r+" border-darken-2 ";o(this).select2({dropdownAutoWidth:!0,width:"100%",containerCssClass:a,dropdownCssClass:a})}),o("select[data-text-color]").each(function(t,e){var s,i=o(this).data("text-color");""!==(s=o(this).data("text-variation"))&&(s=" "+s),o(this).next(".select2").find(".select2-selection__rendered").addClass(i+s)})}(window,document,jQuery);
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 1 - form-validation.js
+---------------------------
+
+/*=========================================================================================
+  File Name: form-validation.js
+  Description: jquery bootsreap validation js
+  ----------------------------------------------------------------------------------------
+  Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+  Author: PIXINVENT
+  Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+(function(window, document, $) {
+  'use strict';
+
+  // Input, Select, Textarea validations except submit button
+  $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+
+})(window, document, jQuery);
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 2 - form-validation.min.js
+---------------------------
+
+!function(){"use strict";jQuery("input,select,textarea").not("[type=submit]").jqBootstrapValidation()}(window,document);
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 1 - components-modal.js
+---------------------------
+
+/*=========================================================================================
+    File Name: components-modal.js
+    Description: Modals are streamlined, but flexible, dialog prompts with the minimum
+				required functionality and smart defaults.
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: Pixinvent
+    Author URL: hhttp://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+(function(window, document, $) {
+	'use strict';
+
+     // onShow event
+    $('#onshowbtn').on('click', function() {
+        $('#onshow').on('show.bs.modal', function() {
+            alert('onShow event fired.');
+        });
+    });
+
+    // onShown event
+    $('#onshownbtn').on('click', function() {
+        $('#onshown').on('shown.bs.modal', function() {
+            alert('onShown event fired.');
+        });
+    });
+
+    // onHide event
+    $('#onhidebtn').on('click', function() {
+        $('#onhide').on('hide.bs.modal', function() {
+            alert('onHide event fired.');
+        });
+    });
+
+    // onHidden event
+    $('#onhiddenbtn').on('click', function() {
+        $('#onhidden').on('hidden.bs.modal', function() {
+            alert('onHidden event fired.');
+        });
+    });
+})(window, document, jQuery);
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 2 - components-modal.min.js
+---------------------------
+
+!function(n,o,e){"use strict";e("#onshowbtn").on("click",function(){e("#onshow").on("show.bs.modal",function(){alert("onShow event fired.")})}),e("#onshownbtn").on("click",function(){e("#onshown").on("shown.bs.modal",function(){alert("onShown event fired.")})}),e("#onhidebtn").on("click",function(){e("#onhide").on("hide.bs.modal",function(){alert("onHide event fired.")})}),e("#onhiddenbtn").on("click",function(){e("#onhidden").on("hidden.bs.modal",function(){alert("onHidden event fired.")})})}(window,document,jQuery);
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 1 - navs.js
+---------------------------
+
+/*=========================================================================================
+    File Name: nav.js
+    Description: Navigation available in Bootstrap share general markup and styles,
+                 from the base .nav class to the active and disabled states.
+                 Swap modifier classes to switch between each style.
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+(function(window, document, $) {
+    'use strict';
+
+    var heightLeft = $('.nav-left + .tab-content').height();
+    $('ul.nav-left').height(heightLeft);
+    var heightRight = $('.nav-right + .tab-content').height();
+    $('ul.nav-right').height(heightRight);
+})(window, document, jQuery);
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 2 - navs.min.js
+---------------------------
+
+!function(t,n,e){"use strict";var h=e(".nav-left + .tab-content").height();e("ul.nav-left").height(h);var i=e(".nav-right + .tab-content").height();e("ul.nav-right").height(i)}(window,document,jQuery);
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 1 - 3-columns-left-sidebar.js
+---------------------------
+
+/*=========================================================================================
+    File Name: 3-columns-left-sidebar.js
+    Description: Invoices list datables configurations
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: Pixinvent
+    Author URL: hhttp://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+$(document).ready(function() {
+    /***********************************
+    *        js of small Slider        *
+    ************************************/
+
+    var sm_options = {
+        start: [30,70],
+        behaviour: 'drag',
+        connect: true,
+        range: {
+            'min': 20,
+            'max': 80
+        }
+    };
+    var smallSlider = document.getElementById('small-slider');
+    noUiSlider.create(smallSlider, sm_options);
+
+
+    /*************************************
+    *        Default Score Rating        *
+    **************************************/
+    $.fn.raty.defaults.path = '../../../app-assets/images/raty/';
+
+    $('#score-rating').raty({
+        score: 3
+    });
+
+    $(".sidebar-sticky").sticky();
+});
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 2 - 3-columns-left-sidebar.min.js
+---------------------------
+
+$(document).ready(function(){var a=document.getElementById("small-slider");noUiSlider.create(a,{start:[30,70],behaviour:"drag",connect:!0,range:{min:20,max:80}}),$.fn.raty.defaults.path="../../../app-assets/images/raty/",$("#score-rating").raty({score:3}),$(".sidebar-sticky").sticky()});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 3 - account-setting.js
+---------------------------
+
+/*=========================================================================================
+	File Name: account-setting.js
+	Description: Account setting.
+	----------------------------------------------------------------------------------------
+	Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+$(document).ready(function () {
+  // language select
+  var languageselect = $("#languageselect2").select2({
+    dropdownAutoWidth: true,
+    width: '100%'
+  });
+  // music select
+  var musicselect = $("#musicselect2").select2({
+    dropdownAutoWidth: true,
+    width: '100%'
+  });
+  // movies select
+  var moviesselect = $("#moviesselect2").select2({
+    dropdownAutoWidth: true,
+    width: '100%'
+  });
+  // birthdate date
+  $('.birthdate-picker').pickadate({
+    format: 'mmmm, d, yyyy'
+  });
+});
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 4 - account-setting.min.js
+---------------------------
+
+$(document).ready(function(){$("#languageselect2").select2({dropdownAutoWidth:!0,width:"100%"}),$("#musicselect2").select2({dropdownAutoWidth:!0,width:"100%"}),$("#moviesselect2").select2({dropdownAutoWidth:!0,width:"100%"});$(".birthdate-picker").pickadate({format:"mmmm, d, yyyy"})});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 5 - app-chat.js
+---------------------------
+
+(function($) {
+  "use strict";
+
+  // Chat user list
+  if($('.chat-application .chat-user-list').length > 0){
+    var chat_user_list = new PerfectScrollbar(".chat-user-list");
+  }
+
+  // Chat user profile
+  if($('.chat-application .profile-sidebar-area .scroll-area').length > 0){
+    var chat_user_list = new PerfectScrollbar(".profile-sidebar-area .scroll-area");
+  }
+
+  // Chat area
+  if($('.chat-application .user-chats').length > 0){
+    var chat_user = new PerfectScrollbar(".user-chats", {
+      wheelPropagation: false
+    });
+  }
+
+  // User profile right area
+  if($('.chat-application .user-profile-sidebar-area').length > 0){
+    var user_profile = new PerfectScrollbar(".user-profile-sidebar-area");
+  }
+
+  // Chat Profile sidebar toggle
+  $('.chat-application .sidebar-profile-toggle').on('click',function(){
+    $('.chat-profile-sidebar').addClass('show');
+    $('.chat-overlay').addClass('show');
+  });
+
+  // User Profile sidebar toggle
+  $('.chat-application .user-profile-toggle').on('click',function(){
+    $('.user-profile-sidebar').addClass('show');
+    $('.chat-overlay').addClass('show');
+  });
+
+  // Update status by clickin on Radio
+  $('.chat-application .user-status input:radio[name=userStatus]').on('change', function(){
+    var $className = "avatar-status-"+this.value;
+    $(".header-profile-sidebar .avatar span").removeClass();
+    $(".sidebar-profile-toggle .avatar span").removeClass();
+    $(".header-profile-sidebar .avatar span").addClass($className+" avatar-status-lg");
+    $(".sidebar-profile-toggle .avatar span").addClass($className);
+  });
+
+  // On Profile close click
+  $(".chat-application .close-icon").on('click',function(){
+    $('.chat-profile-sidebar').removeClass('show');
+    $('.user-profile-sidebar').removeClass('show');
+    if(!$(".sidebar-content").hasClass("show")){
+      $('.chat-overlay').removeClass('show');
+    }
+  });
+
+  // On sidebar close click
+  $(".chat-application .sidebar-close-icon").on('click',function(){
+    $('.sidebar-content').removeClass('show');
+    $('.chat-overlay').removeClass('show');
+  });
+
+  // On overlay click
+  $(".chat-application .chat-overlay").on('click',function(){
+    $('.app-content .sidebar-content').removeClass('show');
+    $('.chat-application .chat-overlay').removeClass('show');
+    $('.chat-profile-sidebar').removeClass('show');
+    $('.user-profile-sidebar').removeClass('show');
+  });
+
+  // Add class active on click of Chat users list
+  $(".chat-application .chat-user-list ul li").on('click', function(){
+    if($('.chat-user-list ul li').hasClass('active')){
+      $('.chat-user-list ul li').removeClass('active');
+    }
+    $(this).addClass("active");
+    $(this).find(".badge").remove();
+    if($('.chat-user-list ul li').hasClass('active')){
+      $('.start-chat-area').addClass('d-none');
+      $('.active-chat').removeClass('d-none');
+    }
+    else{
+      $('.start-chat-area').removeClass('d-none');
+      $('.active-chat').addClass('d-none');
+    }
+  });
+
+  // autoscroll to bottom of Chat area
+  var chatContainer = $(".user-chats");
+  $(".chat-users-list-wrapper li").on("click", function () {
+    chatContainer.animate({ scrollTop: chatContainer[0].scrollHeight }, 400)
+  });
+
+  // Favorite star click
+  $(".chat-application .favorite i").on("click", function(e) {
+    $(this).parent('.favorite').toggleClass("warning");
+    e.stopPropagation();
+  });
+
+  // Main menu toggle should hide app menu
+  $('.chat-application .menu-toggle').on('click',function(e){
+    $('.app-content .sidebar-left').removeClass('show');
+    $('.chat-application .chat-overlay').removeClass('show');
+  });
+
+  // Chat sidebar toggle
+  if ($(window).width() < 992) {
+    $('.chat-application .sidebar-toggle').on('click',function(){
+      $('.app-content .sidebar-content').addClass('show');
+      $('.chat-application .chat-overlay').addClass('show');
+    });
+  }
+
+  // For chat sidebar on small screen
+  if ($(window).width() > 992) {
+    if($('.chat-application .chat-overlay').hasClass('show')){
+      $('.chat-application .chat-overlay').removeClass('show');
+    }
+  }
+
+  // Scroll Chat area
+  $(".user-chats").scrollTop($(".user-chats > .chats").height());
+
+  // Filter
+  $(".chat-application #chat-search").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    if(value!=""){
+      $(".chat-user-list .chat-users-list-wrapper li").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
+    }
+    else{
+      // If filter box is empty
+      $(".chat-user-list .chat-users-list-wrapper li").show();
+    }
+  });
+
+})(jQuery);
+
+$(window).on("resize", function() {
+  // remove show classes from sidebar and overlay if size is > 992
+  if ($(window).width() > 992) {
+    if($('.chat-application .chat-overlay').hasClass('show')){
+      $('.app-content .sidebar-left').removeClass('show');
+      $('.chat-application .chat-overlay').removeClass('show');
+    }
+  }
+
+  // Chat sidebar toggle
+  if ($(window).width() < 992) {
+    if($('.chat-application .chat-profile-sidebar').hasClass('show')){
+      $('.chat-profile-sidebar').removeClass('show');
+    }
+    $('.chat-application .sidebar-toggle').on('click',function(){
+      $('.app-content .sidebar-content').addClass('show');
+      $('.chat-application .chat-overlay').addClass('show');
+    });
+  }
+});
+
+// Add message to chat
+function enter_chat(source) {
+   var message = $(".message").val();
+   if(message != ""){
+  var html = '<div class="chat-content">' + "<p>" + message + "</p>" + "</div>";
+  $(".chat:last-child .chat-body").append(html);
+  $(".message").val("");
+  $(".user-chats").scrollTop($(".user-chats > .chats").height());
+   }
+}
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 6 - app-chat.min.js
+---------------------------
+
+function enter_chat(a){var s=$(".message").val();if(""!=s){var e='<div class="chat-content"><p>'+s+"</p></div>";$(".chat:last-child .chat-body").append(e),$(".message").val(""),$(".user-chats").scrollTop($(".user-chats > .chats").height())}}!function(s){"use strict";if(0<s(".chat-application .chat-user-list").length)new PerfectScrollbar(".chat-user-list");if(0<s(".chat-application .profile-sidebar-area .scroll-area").length)new PerfectScrollbar(".profile-sidebar-area .scroll-area");if(0<s(".chat-application .user-chats").length)new PerfectScrollbar(".user-chats",{wheelPropagation:!1});if(0<s(".chat-application .user-profile-sidebar-area").length)new PerfectScrollbar(".user-profile-sidebar-area");s(".chat-application .sidebar-profile-toggle").on("click",function(){s(".chat-profile-sidebar").addClass("show"),s(".chat-overlay").addClass("show")}),s(".chat-application .user-profile-toggle").on("click",function(){s(".user-profile-sidebar").addClass("show"),s(".chat-overlay").addClass("show")}),s(".chat-application .user-status input:radio[name=userStatus]").on("change",function(){var a="avatar-status-"+this.value;s(".header-profile-sidebar .avatar span").removeClass(),s(".sidebar-profile-toggle .avatar span").removeClass(),s(".header-profile-sidebar .avatar span").addClass(a+" avatar-status-lg"),s(".sidebar-profile-toggle .avatar span").addClass(a)}),s(".chat-application .close-icon").on("click",function(){s(".chat-profile-sidebar").removeClass("show"),s(".user-profile-sidebar").removeClass("show"),s(".sidebar-content").hasClass("show")||s(".chat-overlay").removeClass("show")}),s(".chat-application .sidebar-close-icon").on("click",function(){s(".sidebar-content").removeClass("show"),s(".chat-overlay").removeClass("show")}),s(".chat-application .chat-overlay").on("click",function(){s(".app-content .sidebar-content").removeClass("show"),s(".chat-application .chat-overlay").removeClass("show"),s(".chat-profile-sidebar").removeClass("show"),s(".user-profile-sidebar").removeClass("show")}),s(".chat-application .chat-user-list ul li").on("click",function(){s(".chat-user-list ul li").hasClass("active")&&s(".chat-user-list ul li").removeClass("active"),s(this).addClass("active"),s(this).find(".badge").remove(),s(".chat-user-list ul li").hasClass("active")?(s(".start-chat-area").addClass("d-none"),s(".active-chat").removeClass("d-none")):(s(".start-chat-area").removeClass("d-none"),s(".active-chat").addClass("d-none"))});var a=s(".user-chats");s(".chat-users-list-wrapper li").on("click",function(){a.animate({scrollTop:a[0].scrollHeight},400)}),s(".chat-application .favorite i").on("click",function(a){s(this).parent(".favorite").toggleClass("warning"),a.stopPropagation()}),s(".chat-application .menu-toggle").on("click",function(a){s(".app-content .sidebar-left").removeClass("show"),s(".chat-application .chat-overlay").removeClass("show")}),s(window).width()<992&&s(".chat-application .sidebar-toggle").on("click",function(){s(".app-content .sidebar-content").addClass("show"),s(".chat-application .chat-overlay").addClass("show")}),992<s(window).width()&&s(".chat-application .chat-overlay").hasClass("show")&&s(".chat-application .chat-overlay").removeClass("show"),s(".user-chats").scrollTop(s(".user-chats > .chats").height()),s(".chat-application #chat-search").on("keyup",function(){var a=s(this).val().toLowerCase();""!=a?s(".chat-user-list .chat-users-list-wrapper li").filter(function(){s(this).toggle(-1<s(this).text().toLowerCase().indexOf(a))}):s(".chat-user-list .chat-users-list-wrapper li").show()})}(jQuery),$(window).on("resize",function(){992<$(window).width()&&$(".chat-application .chat-overlay").hasClass("show")&&($(".app-content .sidebar-left").removeClass("show"),$(".chat-application .chat-overlay").removeClass("show")),$(window).width()<992&&($(".chat-application .chat-profile-sidebar").hasClass("show")&&$(".chat-profile-sidebar").removeClass("show"),$(".chat-application .sidebar-toggle").on("click",function(){$(".app-content .sidebar-content").addClass("show"),$(".chat-application .chat-overlay").addClass("show")}))});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 7 - app-ecommerce-details.js
+---------------------------
+
+//  File Name: app-ecommerce-details.js
+//  Description: App Ecommerce Details js.
+//  ----------------------------------------------------------------------------------------------
+//  Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+//  Author: PIXINVENT
+//  Author URL: http://www.themeforest.net/user/pixinvent
+// ================================================================================================
+$(document).ready(function () {
+  var mySwiper14 = new Swiper('.swiper-responsive-breakpoints', {
+    slidesPerView: 5,
+    spaceBetween: 55,
+    // init: false,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      1600: {
+        slidesPerView: 4,
+        spaceBetween: 55,
+      },
+      1300: {
+        slidesPerView: 3,
+        spaceBetween: 55,
+      },
+      900: {
+        slidesPerView: 2,
+        spaceBetween: 55,
+      },
+      768: {
+        slidesPerView: 1,
+        spaceBetween: 55,
+      }
+    }
+  });
+  // product color options
+  $(".product-color-options li").on("click", function () {
+    $this = $(this);
+    $this.addClass('selected').siblings().removeClass('selected');
+  })
+})
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 8 - app-ecommerce-details.min.js
+---------------------------
+
+$(document).ready(function(){new Swiper(".swiper-responsive-breakpoints",{slidesPerView:5,spaceBetween:55,navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},breakpoints:{1600:{slidesPerView:4,spaceBetween:55},1300:{slidesPerView:3,spaceBetween:55},900:{slidesPerView:2,spaceBetween:55},768:{slidesPerView:1,spaceBetween:55}}});$(".product-color-options li").on("click",function(){$this=$(this),$this.addClass("selected").siblings().removeClass("selected")})});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 9 - app-ecommerce-shop.js
+---------------------------
+
+/*=========================================================================================
+    File Name: app-ecommerce-shop.js
+    Description: Ecommerce Shop
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+$(document).ready(function () {
+  "use strict";
+  // RTL Support
+  var direction = 'ltr';
+  if ($('html').data('textdirection') == 'rtl') {
+    direction = 'rtl';
+  }
+
+  var sidebarShop = $(".sidebar-shop"),
+    shopOverlay = $(".shop-content-overlay"),
+    sidebarToggler = $(".shop-sidebar-toggler"),
+    priceFilter = $(".price-options"),
+    gridViewBtn = $(".grid-view-btn"),
+    listViewBtn = $(".list-view-btn"),
+    ecommerceProducts = $("#ecommerce-products"),
+    cart = $(".cart"),
+    wishlist = $(".wishlist");
+
+
+  // show sidebar
+  sidebarToggler.on("click", function () {
+    sidebarShop.toggleClass("show");
+    shopOverlay.toggleClass("show");
+  });
+
+  // remove sidebar
+  $(".shop-content-overlay, .sidebar-close-icon").on("click", function () {
+    sidebarShop.removeClass("show");
+    shopOverlay.removeClass("show");
+  })
+
+  //price slider
+  var slider = document.getElementById("price-slider");
+  if (slider) {
+    noUiSlider.create(slider, {
+      start: [51, 5000],
+      direction: direction,
+      connect: true,
+      tooltips: [true, true],
+      format: wNumb({
+        decimals: 0,
+      }),
+      range: {
+        "min": 51,
+        "max": 5000
+      }
+    });
+  }
+  // for select in ecommerce header
+  if (priceFilter.length > 0) {
+    priceFilter.select2({
+      minimumResultsForSearch: -1,
+      dropdownAutoWidth: true,
+      width: '100%'
+    });
+  }
+
+  /***** CHANGE VIEW *****/
+  // Grid View
+  gridViewBtn.on("click", function () {
+    ecommerceProducts.removeClass("list-view").addClass("grid-view");
+    listViewBtn.removeClass("active");
+    gridViewBtn.addClass("active");
+  });
+
+  // List View
+  listViewBtn.on("click", function () {
+    ecommerceProducts.removeClass("grid-view").addClass("list-view");
+    gridViewBtn.removeClass("active");
+    listViewBtn.addClass("active");
+  });
+
+  // For View in cart
+  cart.on("click", function () {
+    var $this = $(this),
+    addToCart = $this.find(".add-to-cart"),
+    viewInCart = $this.find(".view-in-cart");
+    if(addToCart.is(':visible')) {
+      addToCart.addClass("d-none");
+      viewInCart.addClass("d-inline-block");
+    }
+    else{
+      var href= viewInCart.attr('href');
+      window.location.href = href;
+    }
+  });
+
+  $(".view-in-cart").on('click', function(e){
+    e.preventDefault();
+  });
+
+  // For Wishlist Icon
+  wishlist.on("click", function () {
+    var $this = $(this)
+    $this.find("i").toggleClass("fa-heart-o fa-heart")
+    $this.toggleClass("added");
+  })
+
+  // Checkout Wizard
+  var checkoutWizard = $(".checkout-tab-steps"),
+    checkoutValidation = checkoutWizard.show();
+  if (checkoutWizard.length > 0) {
+    $(checkoutWizard).steps({
+      headerTag: "h6",
+      bodyTag: "fieldset",
+      transitionEffect: "fade",
+      titleTemplate: '<span class="step">#index#</span> #title#',
+      enablePagination: false,
+      onStepChanging: function (event, currentIndex, newIndex) {
+        // allows to go back to previous step if form is
+        if (currentIndex > newIndex) {
+          return true;
+        }
+        // Needed in some cases if the user went back (clean up)
+        if (currentIndex < newIndex) {
+          // To remove error styles
+          checkoutValidation.find(".body:eq(" + newIndex + ") label.error").remove();
+          checkoutValidation.find(".body:eq(" + newIndex + ") .error").removeClass("error");
+        }
+        // check for valid details and show notification accordingly
+        if (currentIndex === 1 && Number($(".form-control.required").val().length) < 1) {
+          toastr.warning('Error', 'Please Enter Valid Details', { "positionClass": "toast-bottom-right" });
+        }
+        checkoutValidation.validate().settings.ignore = ":disabled,:hidden";
+        return checkoutValidation.valid();
+      },
+    });
+    // to move to next step on place order and save address click
+    $(".place-order, .delivery-address").on("click", function () {
+      $(".checkout-tab-steps").steps("next", {});
+    });
+    // check if user has entered valid cvv
+    $(".btn-cvv").on("click", function () {
+      if ($(".input-cvv").val().length == 3) {
+        toastr.success('Success', 'Payment received Successfully', { "positionClass": "toast-bottom-right" });
+      }
+      else {
+        toastr.warning('Error', 'Please Enter Valid Details', { "positionClass": "toast-bottom-right" });
+      }
+    })
+  }
+
+  // checkout quantity counter
+  var quantityCounter = $(".quantity-counter"),
+    CounterMin = 1,
+    CounterMax = 10;
+  if (quantityCounter.length > 0) {
+    quantityCounter.TouchSpin({
+      min: CounterMin,
+      max: CounterMax
+    }).on('touchspin.on.startdownspin', function () {
+      var $this = $(this);
+      $('.bootstrap-touchspin-up').removeClass("disabled-max-min");
+      if ($this.val() == 1) {
+        $(this).siblings().find('.bootstrap-touchspin-down').addClass("disabled-max-min");
+      }
+    }).on('touchspin.on.startupspin', function () {
+      var $this = $(this);
+      $('.bootstrap-touchspin-down').removeClass("disabled-max-min");
+      if ($this.val() == 10) {
+        $(this).siblings().find('.bootstrap-touchspin-up').addClass("disabled-max-min");
+      }
+    });
+  }
+
+  // remove items from wishlist page
+  $(".remove-wishlist , .move-cart").on("click", function () {
+    $(this).closest(".ecommerce-card").remove();
+  })
+})
+// on window resize hide sidebar
+$(window).on("resize", function () {
+  if ($(window).width() <= 991) {
+    $(".sidebar-shop").removeClass("show");
+    $(".shop-content-overlay").removeClass("show");
+  }
+  else {
+    $(".sidebar-shop").addClass("show");
+  }
+});
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 10 - app-ecommerce-shop.min.js
+---------------------------
+
+$(document).ready(function(){"use strict";var e="ltr";"rtl"==$("html").data("textdirection")&&(e="rtl");var t=$(".sidebar-shop"),s=$(".shop-content-overlay"),i=$(".shop-sidebar-toggler"),o=$(".price-options"),a=$(".grid-view-btn"),n=$(".list-view-btn"),r=$("#ecommerce-products"),l=$(".cart"),c=$(".wishlist");i.on("click",function(){t.toggleClass("show"),s.toggleClass("show")}),$(".shop-content-overlay, .sidebar-close-icon").on("click",function(){t.removeClass("show"),s.removeClass("show")});var d=document.getElementById("price-slider");d&&noUiSlider.create(d,{start:[51,5e3],direction:e,connect:!0,tooltips:[!0,!0],format:wNumb({decimals:0}),range:{min:51,max:5e3}}),0<o.length&&o.select2({minimumResultsForSearch:-1,dropdownAutoWidth:!0,width:"100%"}),a.on("click",function(){r.removeClass("list-view").addClass("grid-view"),n.removeClass("active"),a.addClass("active")}),n.on("click",function(){r.removeClass("grid-view").addClass("list-view"),a.removeClass("active"),n.addClass("active")}),l.on("click",function(){var e=$(this),t=e.find(".add-to-cart"),s=e.find(".view-in-cart");if(t.is(":visible"))t.addClass("d-none"),s.addClass("d-inline-block");else{var i=s.attr("href");window.location.href=i}}),$(".view-in-cart").on("click",function(e){e.preventDefault()}),c.on("click",function(){var e=$(this);e.find("i").toggleClass("fa-heart-o fa-heart"),e.toggleClass("added")});var h=$(".checkout-tab-steps"),v=h.show();0<h.length&&($(h).steps({headerTag:"h6",bodyTag:"fieldset",transitionEffect:"fade",titleTemplate:'<span class="step">#index#</span> #title#',enablePagination:!1,onStepChanging:function(e,t,s){return s<t||(t<s&&(v.find(".body:eq("+s+") label.error").remove(),v.find(".body:eq("+s+") .error").removeClass("error")),1===t&&Number($(".form-control.required").val().length)<1&&toastr.warning("Error","Please Enter Valid Details",{positionClass:"toast-bottom-right"}),v.validate().settings.ignore=":disabled,:hidden",v.valid())}}),$(".place-order, .delivery-address").on("click",function(){$(".checkout-tab-steps").steps("next",{})}),$(".btn-cvv").on("click",function(){3==$(".input-cvv").val().length?toastr.success("Success","Payment received Successfully",{positionClass:"toast-bottom-right"}):toastr.warning("Error","Please Enter Valid Details",{positionClass:"toast-bottom-right"})}));var m=$(".quantity-counter");0<m.length&&m.TouchSpin({min:1,max:10}).on("touchspin.on.startdownspin",function(){var e=$(this);$(".bootstrap-touchspin-up").removeClass("disabled-max-min"),1==e.val()&&$(this).siblings().find(".bootstrap-touchspin-down").addClass("disabled-max-min")}).on("touchspin.on.startupspin",function(){var e=$(this);$(".bootstrap-touchspin-down").removeClass("disabled-max-min"),10==e.val()&&$(this).siblings().find(".bootstrap-touchspin-up").addClass("disabled-max-min")}),$(".remove-wishlist , .move-cart").on("click",function(){$(this).closest(".ecommerce-card").remove()})}),$(window).on("resize",function(){$(window).width()<=991?($(".sidebar-shop").removeClass("show"),$(".shop-content-overlay").removeClass("show")):$(".sidebar-shop").addClass("show")});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 11 - app-email.js
+---------------------------
+
+//  Notifications & messages scrollable
+
+$(function () {
+  "use strict";
+
+  var Font = Quill.import('formats/font');
+  Font.whitelist = ['sofia', 'slabo', 'roboto', 'inconsolata', 'ubuntu'];
+  Quill.register(Font, true);
+
+  // Email left Sidebar
+  if ($('.sidebar-menu-list').length > 0) {
+    var sidebar_menu_list = new PerfectScrollbar(".sidebar-menu-list");
+  }
+
+  // User list scroll
+  if ($('.email-user-list').length > 0) {
+    var users_list = new PerfectScrollbar(".email-user-list");
+  }
+
+  // Email detail section
+  if ($('.email-scroll-area').length > 0) {
+    var users_list = new PerfectScrollbar(".email-scroll-area");
+  }
+
+  // Modal dialog scroll
+  if ($('.modal-dialog-scrollable .modal-body').length > 0) {
+    var sidebar_menu_list = new PerfectScrollbar(".modal-dialog-scrollable .modal-body");
+  }
+
+  // Compose Modal - Reset Input Value on Click compose btn
+  $('.compose-btn .btn').on('click', function (e) {
+      // all input forms
+      $(".modal .modal-body input").val("");
+      // quill editor content
+      var quill_editor = $(".modal .modal-body .ql-editor");
+      quill_editor[0].innerHTML = "";
+      // file input content
+      var file_input = $(".modal .modal-body .custom-file .custom-file-label");
+      file_input[0].innerHTML = "";
+  });
+
+  // Main menu toggle should hide app menu
+  $('.menu-toggle').on('click', function (e) {
+    $('.app-content .sidebar-left').removeClass('show');
+    $('.app-content .app-content-overlay').removeClass('show');
+  });
+
+  // On sidebar close click
+  $(".email-application .sidebar-close-icon").on('click', function () {
+    $('.sidebar-left').removeClass('show');
+    $('.app-content-overlay').removeClass('show');
+  });
+
+  // Email sidebar toggle
+  $('.sidebar-toggle').on('click', function (e) {
+    e.stopPropagation();
+    $('.app-content .sidebar-left').toggleClass('show');
+    $('.app-content .app-content-overlay').addClass('show');
+  });
+  $('.app-content .app-content-overlay').on('click', function (e) {
+    $('.app-content .sidebar-left').removeClass('show');
+    $('.app-content .app-content-overlay').removeClass('show');
+  });
+
+  // Email Right sidebar toggle
+  $('.email-app-list .email-user-list li').on('click', function (e) {
+    $('.app-content .email-app-details').toggleClass('show');
+  });
+
+  // Add class active on click of sidebar list
+  $(".email-application .list-group-messages a").on('click', function () {
+    if ($('.email-application .list-group-messages a').hasClass('active')) {
+      $('.email-application .list-group-messages a').removeClass('active');
+    }
+    $(this).addClass("active");
+  });
+
+  // Email detail view back button click
+  $('.go-back').on('click', function (e) {
+    e.stopPropagation();
+    $('.app-content .email-app-details').removeClass('show');
+  });
+
+  // For app sidebar on small screen
+  if ($(window).width() > 768) {
+    if ($('.app-content .app-content-overlay').hasClass('show')) {
+      $('.app-content .app-content-overlay').removeClass('show');
+    }
+  }
+  // Favorite star click
+  $(".email-application .favorite i").on("click", function (e) {
+    $(this).parent('.favorite').toggleClass("warning");
+    e.stopPropagation();
+  });
+
+  // On checkbox click stop propogation
+  $(".email-user-list .vs-checkbox-con input").on("click", function (e) {
+    e.stopPropagation();
+  });
+
+  // Select all checkbox
+  $(document).on("click", ".email-app-list .selectAll input", function () {
+    $(".user-action .vs-checkbox-con input").prop('checked', this.checked);
+  });
+
+  // Delete Mail from list
+  $(".email-application .mail-delete").on("click", function () {
+    $(".email-application .user-action .vs-checkbox-con input:checked").closest("li").remove();
+    $(".email-application .selectAll input").prop('checked', "");
+  });
+
+  // Mark mail unread
+  $(".email-application .mail-unread").on("click", function () {
+    $(".email-application .user-action .vs-checkbox-con input:checked").closest("li").removeClass("mail-read");
+  });
+
+  // Filter
+  $(".email-app-list #email-search").on("keyup", function () {
+    var value = $(this).val().toLowerCase();
+    if (value != "") {
+      $(".email-user-list .users-list-wrapper li").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
+      var tbl_row = $(".email-user-list .users-list-wrapper li:visible").length; //here tbl_test is table name
+
+      //Check if table has row or not
+      if (tbl_row == 0) {
+        $('.email-user-list .no-results').addClass('show');
+      }
+      else {
+        if ($('.email-user-list .no-results').hasClass('show')) {
+          $('.email-user-list .no-results').removeClass('show');
+        }
+      }
+    }
+    else {
+      // If filter box is empty
+      $(".email-user-list .users-list-wrapper li").show();
+      if ($('.email-user-list .no-results').hasClass('show')) {
+        $('.email-user-list .no-results').removeClass('show');
+      }
+    }
+  });
+
+  // Email compose Editor
+
+  var emailEditor = new Quill('#email-container .editor', {
+    bounds: '#email-container .editor',
+    modules: {
+      'formula': true,
+      'syntax': true,
+      'toolbar': [
+        ['bold', 'italic', 'underline', 'strike', 'link', 'blockquote', 'code-block',
+          {
+            'header': '1'
+          }, {
+            'header': '2'
+          }, {
+            'list': 'ordered'
+          }, {
+            'list': 'bullet'
+          }],
+        [{
+          'font': []
+        }]
+      ],
+    },
+    placeholder: 'Message',
+    theme: 'snow'
+  });
+
+  var editors = [emailEditor];
+
+});
+
+$(window).on("resize", function () {
+  // remove show classes from sidebar and overlay if size is > 992
+  if ($(window).width() > 768) {
+    if ($('.app-content .app-content-overlay').hasClass('show')) {
+      $('.app-content .sidebar-left').removeClass('show');
+      $('.app-content .app-content-overlay').removeClass('show');
+    }
+  }
+});
+
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 12 - app-email.min.js
+---------------------------
+
+$(function(){"use strict";var e=Quill.import("formats/font");if(e.whitelist=["sofia","slabo","roboto","inconsolata","ubuntu"],Quill.register(e,!0),0<$(".sidebar-menu-list").length)new PerfectScrollbar(".sidebar-menu-list");if(0<$(".email-user-list").length)new PerfectScrollbar(".email-user-list");if(0<$(".email-scroll-area").length)new PerfectScrollbar(".email-scroll-area");if(0<$(".modal-dialog-scrollable .modal-body").length)new PerfectScrollbar(".modal-dialog-scrollable .modal-body");$(".compose-btn .btn").on("click",function(e){$(".modal .modal-body input").val(""),$(".modal .modal-body .ql-editor")[0].innerHTML="",$(".modal .modal-body .custom-file .custom-file-label")[0].innerHTML=""}),$(".menu-toggle").on("click",function(e){$(".app-content .sidebar-left").removeClass("show"),$(".app-content .app-content-overlay").removeClass("show")}),$(".email-application .sidebar-close-icon").on("click",function(){$(".sidebar-left").removeClass("show"),$(".app-content-overlay").removeClass("show")}),$(".sidebar-toggle").on("click",function(e){e.stopPropagation(),$(".app-content .sidebar-left").toggleClass("show"),$(".app-content .app-content-overlay").addClass("show")}),$(".app-content .app-content-overlay").on("click",function(e){$(".app-content .sidebar-left").removeClass("show"),$(".app-content .app-content-overlay").removeClass("show")}),$(".email-app-list .email-user-list li").on("click",function(e){$(".app-content .email-app-details").toggleClass("show")}),$(".email-application .list-group-messages a").on("click",function(){$(".email-application .list-group-messages a").hasClass("active")&&$(".email-application .list-group-messages a").removeClass("active"),$(this).addClass("active")}),$(".go-back").on("click",function(e){e.stopPropagation(),$(".app-content .email-app-details").removeClass("show")}),768<$(window).width()&&$(".app-content .app-content-overlay").hasClass("show")&&$(".app-content .app-content-overlay").removeClass("show"),$(".email-application .favorite i").on("click",function(e){$(this).parent(".favorite").toggleClass("warning"),e.stopPropagation()}),$(".email-user-list .vs-checkbox-con input").on("click",function(e){e.stopPropagation()}),$(document).on("click",".email-app-list .selectAll input",function(){$(".user-action .vs-checkbox-con input").prop("checked",this.checked)}),$(".email-application .mail-delete").on("click",function(){$(".email-application .user-action .vs-checkbox-con input:checked").closest("li").remove(),$(".email-application .selectAll input").prop("checked","")}),$(".email-application .mail-unread").on("click",function(){$(".email-application .user-action .vs-checkbox-con input:checked").closest("li").removeClass("mail-read")}),$(".email-app-list #email-search").on("keyup",function(){var e=$(this).val().toLowerCase();""!=e?($(".email-user-list .users-list-wrapper li").filter(function(){$(this).toggle(-1<$(this).text().toLowerCase().indexOf(e))}),0==$(".email-user-list .users-list-wrapper li:visible").length?$(".email-user-list .no-results").addClass("show"):$(".email-user-list .no-results").hasClass("show")&&$(".email-user-list .no-results").removeClass("show")):($(".email-user-list .users-list-wrapper li").show(),$(".email-user-list .no-results").hasClass("show")&&$(".email-user-list .no-results").removeClass("show"))});new Quill("#email-container .editor",{bounds:"#email-container .editor",modules:{formula:!0,syntax:!0,toolbar:[["bold","italic","underline","strike","link","blockquote","code-block",{header:"1"},{header:"2"},{list:"ordered"},{list:"bullet"}],[{font:[]}]]},placeholder:"Message",theme:"snow"})}),$(window).on("resize",function(){768<$(window).width()&&$(".app-content .app-content-overlay").hasClass("show")&&($(".app-content .sidebar-left").removeClass("show"),$(".app-content .app-content-overlay").removeClass("show"))});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 13 - app-todo.js
+---------------------------
+
+/*=========================================================================================
+    File Name: app-todo.js
+    Description: app-todo
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+$(function() {
+  "use strict";
+
+  var $curr_title, $curr_desc, $curr_info, $curr_fav, $curr_chipVal;
+
+  // --------------------------------------------
+  // Sidebar menu scrollbar
+  // --------------------------------------------
+  if($('.todo-application .sidebar-menu-list').length > 0){
+      var content = new PerfectScrollbar('.sidebar-menu-list',{
+         theme: "dark"
+      });
+  }
+
+  // --------------------------------------------
+  // Todo task list scrollbar
+  // --------------------------------------------
+  if($('.todo-application .todo-task-list').length > 0){
+      var sidebar_todo = new PerfectScrollbar('.todo-task-list',{
+         theme: "dark"
+      });
+  }
+
+
+  // --------------------------------------------
+  // Info star click
+  // --------------------------------------------
+  $(document).on("click", ".todo-application .todo-item-info i", function(e) {
+    $(this).parent('.todo-item-info').toggleClass("success");
+    e.stopPropagation();
+  });
+
+
+  // --------------------------------------------
+  // Favorite star click
+  // --------------------------------------------
+  $(document).on("click", ".todo-application .todo-item-favorite i", function(e) {
+    $(this).parent('.todo-item-favorite').toggleClass("warning");
+    e.stopPropagation();
+  });
+
+  // --------------------------------------------
+  // Main menu toggle should hide app menu
+  // --------------------------------------------
+  $('.menu-toggle').on('click',function(e){
+    $('.app-content .sidebar-left').removeClass('show');
+    $('.app-content .app-content-overlay').removeClass('show');
+  });
+
+  // --------------------------------------------
+  // On sidebar close click
+  // --------------------------------------------
+  $(".todo-application .sidebar-close-icon").on('click',function(){
+    $('.sidebar-left').removeClass('show');
+    $('.app-content-overlay').removeClass('show');
+  });
+
+  // --------------------------------------------
+  // Todo sidebar toggle
+  // --------------------------------------------
+  $('.sidebar-toggle').on('click',function(e){
+    e.stopPropagation();
+    $('.app-content .sidebar-left').toggleClass('show');
+    $('.app-content .app-content-overlay').addClass('show');
+  });
+  $('.app-content .app-content-overlay').on('click',function(e){
+    $('.app-content .sidebar-left').removeClass('show');
+    $('.app-content .app-content-overlay').removeClass('show');
+  });
+
+  // --------------------------------------------
+  // Add class active on click of sidebar filters list
+  // --------------------------------------------
+  $(".todo-application .list-group-filters a").on('click', function(){
+    if($('.todo-application .list-group-filters a').hasClass('active')){
+      $('.todo-application .list-group-filters a').removeClass('active');
+    }
+    $(this).addClass("active");
+  });
+
+  // --------------------------------------------
+  // For chat sidebar on small screen
+  // --------------------------------------------
+  if ($(window).width() > 992) {
+      if($('.todo-application .app-content-overlay').hasClass('show')){
+          $('.todo-application .app-content-overlay').removeClass('show');
+      }
+  }
+
+  // --------------------------------------------
+  // On add new item, clear modal popup fields
+  // --------------------------------------------
+  $(".add-task button").on('click', function(e){
+    $('.modal .new-todo-item-title').val("");
+    $('.modal .new-todo-item-desc').val("");
+    $('.modal .dropdown-menu input').prop("checked", false);
+    if($('.modal .todo-item-info').hasClass('success')){$('.modal .todo-item-info').removeClass('success')}
+    if($('.modal .todo-item-favorite').hasClass('warning')){$('.modal .todo-item-favorite').removeClass('warning')}
+  });
+
+
+  // --------------------------------------------
+  // Add New ToDo List Item
+  // --------------------------------------------
+
+
+  // To add new todo list item
+  $(".add-todo-item").on('click', function(e){
+    e.preventDefault();
+    var todoInfo = "",
+    todoFav = "",
+    todoChip = "";
+
+    var todoTitle = $(".new-todo-item-title").val();
+    var todoDesc = $(".new-todo-item-desc").val();
+    if($(".modal.show .todo-item-info").hasClass('success')){
+      todoInfo = " success";
+    }
+    if($(".modal.show .todo-item-favorite").hasClass('warning')){
+      todoFav = " warning";
+    }
+
+    // Chip calculation loop
+    var selected  = $('.modal .dropdown-menu input:checked');
+
+    selected.each(function(){
+      todoChip += '<div class="chip mb-0">' +
+        '<div class="chip-body">' +
+          '<span class="chip-text" data-value="'+$(this).data('value')+'"><span class="bullet bullet-'+$(this).data('color')+' bullet-xs"></span> '+$(this).data('value')+'</span>' +
+        '</div>' +
+      '</div>';
+    });
+    // HTML Output
+    if(todoTitle != ""){
+      $(".todo-task-list-wrapper").append('<li class="todo-item" style="animation-delay: 0s;"  data-toggle="modal" data-target="#editTaskModal">' +
+        '<div class="todo-title-wrapper d-flex justify-content-between mb-50">' +
+          '<div class="todo-title-area d-flex align-items-center">' +
+            '<div class="title-wrapper d-flex">'+
+              '<div class="vs-checkbox-con">' +
+                  '<input type="checkbox" >' +
+                  '<span class="vs-checkbox vs-checkbox-sm">' +
+                    '<span class="vs-checkbox--check">' +
+                      '<i class="vs-icon feather icon-check"></i>' +
+                    '</span>' +
+                  '</span>' +
+              '</div>' +
+              '<h6 class="todo-title mt-50 mx-50">'+ todoTitle +'</h6>' +
+            '</div>' +
+            '<div class="chip-wrapper">' + todoChip + '</div>' +
+          '</div>' +
+          '<div class="float-right todo-item-action d-flex">' +
+            '<a class="todo-item-info'+ todoInfo +'"><i class="feather icon-info"></i></a>' +
+            '<a class="todo-item-favorite'+ todoFav +'"><i class="feather icon-star"></i></a>' +
+            '<a class="todo-item-delete"><i class="feather icon-trash"></i></a>' +
+          '</div>' +
+        '</div>' +
+        '<p class="mb-0 todo-desc truncate">'+ todoDesc +'</p>' +
+      '</li>');
+    }
+
+    $('#form-edit-todo .edit-todo-item-title').val(todoTitle);
+    $('#form-edit-todo .edit-todo-item-desc').val(todoDesc);
+    $('#form-edit-todo .dropdown-menu input').prop("checked", false);
+    if($('#form-edit-todo .edit-todo-item-info').hasClass('success')){$('#form-edit-todo .edit-todo-item-info').addClass('success')}
+    if($('#form-edit-todo .edit-todo-item-favorite').hasClass('warning')){$('#form-edit-todo .edit-todo-item-favorite').addClass('warning')}
+  });
+
+
+  // --------------------------------------------
+  // To update todo list item
+  // --------------------------------------------
+  $(document).on('click',".todo-task-list-wrapper .todo-item", function(e){
+
+    // Saving all values in variable
+    $curr_title = $(this).find('.todo-title');  // Set path for Current Title, use this variable when updating title
+    $curr_desc = $(this).find('.todo-desc');  // Set path for Current Description, use this variable when updating Description
+    $curr_info = $(this).find('.todo-item-info');  // Set path for Current info, use this variable when updating info
+    $curr_fav = $(this).find('.todo-item-favorite'); // Set path for Current favorite, use this variable when updating favorite
+    $curr_chipVal = $(this).find('.chip-wrapper'); // Set path for Chips, use this variable when updating chip value
+
+    var $title = $(this).find('.todo-title').html();
+    var $desc = $(this).find('.todo-desc').html();
+    var $info = $(this).find('.todo-item-info');
+    var $fav = $(this).find('.todo-item-favorite');
+    $('#form-edit-todo .dropdown-menu input').prop("checked",false);
+
+
+    // Checkbox checked as per chips
+
+    var selected  = $(this).find('.chip');
+    selected.each(function(){
+
+      var chipVal = $(this).find('.chip-text').data('value');
+      $('#form-edit-todo .dropdown-menu input[data-value="'+chipVal+'"]').prop("checked",true);
+    });
+
+    // apply all variable values to fields
+    $('#form-edit-todo .edit-todo-item-title').val($title);
+    $('#form-edit-todo .edit-todo-item-desc').val($desc);
+
+    if($('#form-edit-todo .todo-item-info').hasClass('success')){$('#form-edit-todo .todo-item-info').removeClass('success')}
+    if($('#form-edit-todo .edit-todo-item-favorite').hasClass('warning')){$('#form-edit-todo .edit-todo-item-favorite').removeClass('warning')}
+
+    if( $($info).hasClass('success') ) {
+      $('#form-edit-todo .todo-item-info').addClass('success');
+    }
+
+    if( $($fav).hasClass('warning') ) {
+      $('#form-edit-todo .edit-todo-item-favorite').addClass('warning');
+    }
+  });
+
+
+  // --------------------------------------------
+  // Updating Data Values to Fields
+  // --------------------------------------------
+  $('.update-todo-item').on('click', function(){
+    var $edit_title = $('#form-edit-todo .edit-todo-item-title').val();
+    var $edit_desc = $('#form-edit-todo .edit-todo-item-desc').val();
+    var $edit_info = $('#form-edit-todo .todo-item-info i');
+    var $edit_fav = $('#form-edit-todo .todo-item-favorite i');
+
+    $($curr_title).text($edit_title);
+    $($curr_desc).text($edit_desc);
+
+    if($($curr_info).hasClass('success')){$($curr_info).removeClass('success')}
+    if($($curr_fav).hasClass('warning')){$($curr_fav).removeClass('warning')}
+
+    if( $($edit_info).parent('.todo-item-info').hasClass('success')) {
+      $curr_info.addClass('success');
+    }
+
+    if( $($edit_fav).parent('.todo-item-favorite').hasClass('warning')) {
+      $curr_fav.addClass('warning');
+    }
+
+    // Chip calculation loop
+    var $edit_selected  = $('#form-edit-todo .dropdown-menu input:checked');
+    var $edit_todoChip = "";
+
+        $edit_selected.each(function(){
+          $edit_todoChip += '<div class="chip mb-0">' +
+            '<div class="chip-body">' +
+              '<span class="chip-text" data-value="'+$(this).data('value')+'"><span class="bullet bullet-'+$(this).data('color')+' bullet-xs"></span> '+$(this).data('value')+'</span>' +
+            '</div>' +
+          '</div>';
+        });
+
+    $curr_chipVal.empty();
+
+    $($curr_chipVal).append($edit_todoChip);
+
+
+  });
+
+
+  // --------------------------------------------
+  //EVENT DELETION
+  // --------------------------------------------
+  $(document).on('click', '.todo-item-delete', function(e){
+    var item = this;
+    e.stopPropagation();
+    $(item).closest('.todo-item').remove();
+  })
+
+  // Complete task strike through
+  $(document).on('click', '.todo-item input', function(event){
+    event.stopPropagation();
+    $(this).closest('.todo-item').toggleClass("completed");
+  });
+
+
+  // --------------------------------------------
+  // Filter
+  // --------------------------------------------
+  $("#todo-search").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    if(value!=""){
+      $(".todo-item").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
+      var tbl_row = $(".todo-item:visible").length; //here tbl_test is table name
+
+      //Check if table has row or not
+      if ( tbl_row == 0 ){
+        if(!$('.no-results').hasClass('show') ){
+          $('.no-results').addClass('show');
+        }
+      }
+      else{
+        $('.no-results').removeClass('show');
+
+      }
+    }
+    else{
+      // If filter box is empty
+      $(".todo-item").show();
+      if($('.no-results').hasClass('show') ){
+        $('.no-results').removeClass('show');
+      }
+    }
+  });
+
+});
+
+$(window).on("resize", function() {
+    // remove show classes from sidebar and overlay if size is > 992
+    if ($(window).width() > 992) {
+        if($('.app-content .app-content-overlay').hasClass('show')){
+            $('.app-content .sidebar-left').removeClass('show');
+            $('.app-content .app-content-overlay').removeClass('show');
+        }
+    }
+});
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 14 - app-todo.min.js
+---------------------------
+
+$(function(){"use strict";var d,n,l,c,r;if(0<$(".todo-application .sidebar-menu-list").length)new PerfectScrollbar(".sidebar-menu-list",{theme:"dark"});if(0<$(".todo-application .todo-task-list").length)new PerfectScrollbar(".todo-task-list",{theme:"dark"});$(document).on("click",".todo-application .todo-item-info i",function(o){$(this).parent(".todo-item-info").toggleClass("success"),o.stopPropagation()}),$(document).on("click",".todo-application .todo-item-favorite i",function(o){$(this).parent(".todo-item-favorite").toggleClass("warning"),o.stopPropagation()}),$(".menu-toggle").on("click",function(o){$(".app-content .sidebar-left").removeClass("show"),$(".app-content .app-content-overlay").removeClass("show")}),$(".todo-application .sidebar-close-icon").on("click",function(){$(".sidebar-left").removeClass("show"),$(".app-content-overlay").removeClass("show")}),$(".sidebar-toggle").on("click",function(o){o.stopPropagation(),$(".app-content .sidebar-left").toggleClass("show"),$(".app-content .app-content-overlay").addClass("show")}),$(".app-content .app-content-overlay").on("click",function(o){$(".app-content .sidebar-left").removeClass("show"),$(".app-content .app-content-overlay").removeClass("show")}),$(".todo-application .list-group-filters a").on("click",function(){$(".todo-application .list-group-filters a").hasClass("active")&&$(".todo-application .list-group-filters a").removeClass("active"),$(this).addClass("active")}),992<$(window).width()&&$(".todo-application .app-content-overlay").hasClass("show")&&$(".todo-application .app-content-overlay").removeClass("show"),$(".add-task button").on("click",function(o){$(".modal .new-todo-item-title").val(""),$(".modal .new-todo-item-desc").val(""),$(".modal .dropdown-menu input").prop("checked",!1),$(".modal .todo-item-info").hasClass("success")&&$(".modal .todo-item-info").removeClass("success"),$(".modal .todo-item-favorite").hasClass("warning")&&$(".modal .todo-item-favorite").removeClass("warning")}),$(".add-todo-item").on("click",function(o){o.preventDefault();var t="",e="",s="",i=$(".new-todo-item-title").val(),a=$(".new-todo-item-desc").val();$(".modal.show .todo-item-info").hasClass("success")&&(t=" success"),$(".modal.show .todo-item-favorite").hasClass("warning")&&(e=" warning"),$(".modal .dropdown-menu input:checked").each(function(){s+='<div class="chip mb-0"><div class="chip-body"><span class="chip-text" data-value="'+$(this).data("value")+'"><span class="bullet bullet-'+$(this).data("color")+' bullet-xs"></span> '+$(this).data("value")+"</span></div></div>"}),""!=i&&$(".todo-task-list-wrapper").append('<li class="todo-item" style="animation-delay: 0s;"  data-toggle="modal" data-target="#editTaskModal"><div class="todo-title-wrapper d-flex justify-content-between mb-50"><div class="todo-title-area d-flex align-items-center"><div class="title-wrapper d-flex"><div class="vs-checkbox-con"><input type="checkbox" ><span class="vs-checkbox vs-checkbox-sm"><span class="vs-checkbox--check"><i class="vs-icon feather icon-check"></i></span></span></div><h6 class="todo-title mt-50 mx-50">'+i+'</h6></div><div class="chip-wrapper">'+s+'</div></div><div class="float-right todo-item-action d-flex"><a class="todo-item-info'+t+'"><i class="feather icon-info"></i></a><a class="todo-item-favorite'+e+'"><i class="feather icon-star"></i></a><a class="todo-item-delete"><i class="feather icon-trash"></i></a></div></div><p class="mb-0 todo-desc truncate">'+a+"</p></li>"),$("#form-edit-todo .edit-todo-item-title").val(i),$("#form-edit-todo .edit-todo-item-desc").val(a),$("#form-edit-todo .dropdown-menu input").prop("checked",!1),$("#form-edit-todo .edit-todo-item-info").hasClass("success")&&$("#form-edit-todo .edit-todo-item-info").addClass("success"),$("#form-edit-todo .edit-todo-item-favorite").hasClass("warning")&&$("#form-edit-todo .edit-todo-item-favorite").addClass("warning")}),$(document).on("click",".todo-task-list-wrapper .todo-item",function(o){d=$(this).find(".todo-title"),n=$(this).find(".todo-desc"),l=$(this).find(".todo-item-info"),c=$(this).find(".todo-item-favorite"),r=$(this).find(".chip-wrapper");var t=$(this).find(".todo-title").html(),e=$(this).find(".todo-desc").html(),s=$(this).find(".todo-item-info"),i=$(this).find(".todo-item-favorite");$("#form-edit-todo .dropdown-menu input").prop("checked",!1),$(this).find(".chip").each(function(){var o=$(this).find(".chip-text").data("value");$('#form-edit-todo .dropdown-menu input[data-value="'+o+'"]').prop("checked",!0)}),$("#form-edit-todo .edit-todo-item-title").val(t),$("#form-edit-todo .edit-todo-item-desc").val(e),$("#form-edit-todo .todo-item-info").hasClass("success")&&$("#form-edit-todo .todo-item-info").removeClass("success"),$("#form-edit-todo .edit-todo-item-favorite").hasClass("warning")&&$("#form-edit-todo .edit-todo-item-favorite").removeClass("warning"),$(s).hasClass("success")&&$("#form-edit-todo .todo-item-info").addClass("success"),$(i).hasClass("warning")&&$("#form-edit-todo .edit-todo-item-favorite").addClass("warning")}),$(".update-todo-item").on("click",function(){var o=$("#form-edit-todo .edit-todo-item-title").val(),t=$("#form-edit-todo .edit-todo-item-desc").val(),e=$("#form-edit-todo .todo-item-info i"),s=$("#form-edit-todo .todo-item-favorite i");$(d).text(o),$(n).text(t),$(l).hasClass("success")&&$(l).removeClass("success"),$(c).hasClass("warning")&&$(c).removeClass("warning"),$(e).parent(".todo-item-info").hasClass("success")&&l.addClass("success"),$(s).parent(".todo-item-favorite").hasClass("warning")&&c.addClass("warning");var i=$("#form-edit-todo .dropdown-menu input:checked"),a="";i.each(function(){a+='<div class="chip mb-0"><div class="chip-body"><span class="chip-text" data-value="'+$(this).data("value")+'"><span class="bullet bullet-'+$(this).data("color")+' bullet-xs"></span> '+$(this).data("value")+"</span></div></div>"}),r.empty(),$(r).append(a)}),$(document).on("click",".todo-item-delete",function(o){o.stopPropagation(),$(this).closest(".todo-item").remove()}),$(document).on("click",".todo-item input",function(o){o.stopPropagation(),$(this).closest(".todo-item").toggleClass("completed")}),$("#todo-search").on("keyup",function(){var o=$(this).val().toLowerCase();""!=o?($(".todo-item").filter(function(){$(this).toggle(-1<$(this).text().toLowerCase().indexOf(o))}),0==$(".todo-item:visible").length?$(".no-results").hasClass("show")||$(".no-results").addClass("show"):$(".no-results").removeClass("show")):($(".todo-item").show(),$(".no-results").hasClass("show")&&$(".no-results").removeClass("show"))})}),$(window).on("resize",function(){992<$(window).width()&&$(".app-content .app-content-overlay").hasClass("show")&&($(".app-content .sidebar-left").removeClass("show"),$(".app-content .app-content-overlay").removeClass("show"))});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 15 - app-user.js
+---------------------------
+
+/*=========================================================================================
+    File Name: app-user.js
+    Description: User page
+    --------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+$(document).ready(function () {
+
+  var isRtl;
+  if ( $('html').attr('data-textdirection') == 'rtl' ) {
+    isRtl = true;
+  } else {
+    isRtl = false;
+  }
+
+  //  Rendering badge in status column
+  var customBadgeHTML = function (params) {
+    var color = "";
+    if (params.value == "active") {
+      color = "success"
+      return "<div class='badge badge-pill badge-light-" + color + "' >" + params.value + "</div>"
+    } else if (params.value == "blocked") {
+      color = "danger";
+      return "<div class='badge badge-pill badge-light-" + color + "' >" + params.value + "</div>"
+    } else if (params.value == "deactivated") {
+      color = "warning";
+      return "<div class='badge badge-pill badge-light-" + color + "' >" + params.value + "</div>"
+    }
+  }
+
+  //  Rendering bullet in verified column
+  var customBulletHTML = function (params) {
+    var color = "";
+    if (params.value == true) {
+      color = "success"
+      return "<div class='bullet bullet-sm bullet-" + color + "' >" + "</div>"
+    } else if (params.value == false) {
+      color = "secondary";
+      return "<div class='bullet bullet-sm bullet-" + color + "' >" + "</div>"
+    }
+  }
+
+  // Renering Icons in Actions column
+  var customIconsHTML = function (params) {
+    var usersIcons = document.createElement("span");
+    var editIconHTML = "<a href='app-user-edit.html'><i class= 'users-edit-icon feather icon-edit-1 mr-50'></i></a>"
+    var deleteIconHTML = document.createElement('i');
+    var attr = document.createAttribute("class")
+    attr.value = "users-delete-icon feather icon-trash-2"
+    deleteIconHTML.setAttributeNode(attr);
+    // selected row delete functionality
+    deleteIconHTML.addEventListener("click", function () {
+      deleteArr = [
+        params.data
+      ];
+      // var selectedData = gridOptions.api.getSelectedRows();
+      gridOptions.api.updateRowData({
+        remove: deleteArr
+      });
+    });
+    usersIcons.appendChild($.parseHTML(editIconHTML)[0]);
+    usersIcons.appendChild(deleteIconHTML);
+    return usersIcons
+  }
+
+  //  Rendering avatar in username column
+  var customAvatarHTML = function (params) {
+    return "<span class='avatar'><img src='" + params.data.avatar + "' height='32' width='32'></span>" + params.value
+  }
+
+  // ag-grid
+  /*** COLUMN DEFINE ***/
+
+  var columnDefs = [{
+      headerName: 'ID',
+      field: 'id',
+      width: 125,
+      filter: true,
+      checkboxSelection: true,
+      headerCheckboxSelectionFilteredOnly: true,
+      headerCheckboxSelection: true,
+    },
+    {
+      headerName: 'Username',
+      field: 'username',
+      filter: true,
+      width: 175,
+      cellRenderer: customAvatarHTML,
+    },
+    {
+      headerName: 'Email',
+      field: 'email',
+      filter: true,
+      width: 225,
+    },
+    {
+      headerName: 'Name',
+      field: 'name',
+      filter: true,
+      width: 200,
+    },
+    {
+      headerName: 'Country',
+      field: 'country',
+      filter: true,
+      width: 150,
+    },
+    {
+      headerName: 'Role',
+      field: 'role',
+      filter: true,
+      width: 150,
+    },
+    {
+      headerName: 'Status',
+      field: 'status',
+      filter: true,
+      width: 150,
+      cellRenderer: customBadgeHTML,
+      cellStyle: {
+        "text-align": "center"
+      }
+    },
+    {
+      headerName: 'Verified',
+      field: 'is_verified',
+      filter: true,
+      width: 125,
+      cellRenderer: customBulletHTML,
+      cellStyle: {
+        "text-align": "center"
+      }
+    },
+    {
+      headerName: 'Department',
+      field: 'department',
+      filter: true,
+      width: 150,
+    },
+    {
+      headerName: 'Actions',
+      field: 'transactions',
+      width: 150,
+      cellRenderer: customIconsHTML,
+    }
+  ];
+
+  /*** GRID OPTIONS ***/
+  var gridOptions = {
+    defaultColDef: {
+      sortable: true
+    },
+    enableRtl: isRtl,
+    columnDefs: columnDefs,
+    rowSelection: "multiple",
+    floatingFilter: true,
+    filter: true,
+    pagination: true,
+    paginationPageSize: 20,
+    pivotPanelShow: "always",
+    colResizeDefault: "shift",
+    animateRows: true,
+    resizable: true
+  };
+  if (document.getElementById("myGrid")) {
+    /*** DEFINED TABLE VARIABLE ***/
+    var gridTable = document.getElementById("myGrid");
+
+    /*** GET TABLE DATA FROM URL ***/
+    agGrid
+      .simpleHttpRequest({
+        url: "../../../app-assets/data/users-list.json"
+      })
+      .then(function (data) {
+        gridOptions.api.setRowData(data);
+      });
+
+    /*** FILTER TABLE ***/
+    function updateSearchQuery(val) {
+      gridOptions.api.setQuickFilter(val);
+    }
+
+    $(".ag-grid-filter").on("keyup", function () {
+      updateSearchQuery($(this).val());
+    });
+
+    /*** CHANGE DATA PER PAGE ***/
+    function changePageSize(value) {
+      gridOptions.api.paginationSetPageSize(Number(value));
+    }
+
+    $(".sort-dropdown .dropdown-item").on("click", function () {
+      var $this = $(this);
+      changePageSize($this.text());
+      $(".filter-btn").text("1 - " + $this.text() + " of 50");
+    });
+
+    /*** EXPORT AS CSV BTN ***/
+    $(".ag-grid-export-btn").on("click", function (params) {
+      gridOptions.api.exportDataAsCsv();
+    });
+
+    //  filter data function
+    var filterData = function agSetColumnFilter(column, val) {
+      var filter = gridOptions.api.getFilterInstance(column)
+      var modelObj = null
+      if (val !== "all") {
+        modelObj = {
+          type: "equals",
+          filter: val
+        }
+      }
+      filter.setModel(modelObj)
+      gridOptions.api.onFilterChanged()
+    }
+    //  filter inside role
+    $("#users-list-role").on("change", function () {
+      var usersListRole = $("#users-list-role").val();
+      filterData("role", usersListRole)
+    });
+    //  filter inside verified
+    $("#users-list-verified").on("change", function () {
+      var usersListVerified = $("#users-list-verified").val();
+      filterData("is_verified", usersListVerified)
+    });
+    //  filter inside status
+    $("#users-list-status").on("change", function () {
+      var usersListStatus = $("#users-list-status").val();
+      filterData("status", usersListStatus)
+    });
+    //  filter inside department
+    $("#users-list-department").on("change", function () {
+      var usersListDepartment = $("#users-list-department").val();
+      filterData("department", usersListDepartment)
+    });
+    // filter reset
+    $(".users-data-filter").click(function () {
+      $('#users-list-role').prop('selectedIndex', 0);
+      $('#users-list-role').change();
+      $('#users-list-status').prop('selectedIndex', 0);
+      $('#users-list-status').change();
+      $('#users-list-verified').prop('selectedIndex', 0);
+      $('#users-list-verified').change();
+      $('#users-list-department').prop('selectedIndex', 0);
+      $('#users-list-department').change();
+    });
+
+    /*** INIT TABLE ***/
+    new agGrid.Grid(gridTable, gridOptions);
+  }
+  // users language select
+  if ($("#users-language-select2").length > 0) {
+    $("#users-language-select2").select2({
+      dropdownAutoWidth: true,
+      width: '100%'
+    });
+  }
+  // users music select
+  if ($("#users-music-select2").length > 0) {
+    $("#users-music-select2").select2({
+      dropdownAutoWidth: true,
+      width: '100%'
+    });
+  }
+  // users movies select
+  if ($("#users-movies-select2").length > 0) {
+    $("#users-movies-select2").select2({
+      dropdownAutoWidth: true,
+      width: '100%'
+    });
+  }
+  // users birthdate date
+  if ($(".birthdate-picker").length > 0) {
+    $('.birthdate-picker').pickadate({
+      format: 'mmmm, d, yyyy'
+    });
+  }
+  // Input, Select, Textarea validations except submit button validation initialization
+  if ($(".users-edit").length > 0) {
+    $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+  }
+});
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 16 - app-user.min.js
+---------------------------
+
+$(document).ready(function(){var l={defaultColDef:{sortable:!0},enableRtl:"rtl"==$("html").attr("data-textdirection"),columnDefs:[{headerName:"ID",field:"id",width:125,filter:!0,checkboxSelection:!0,headerCheckboxSelectionFilteredOnly:!0,headerCheckboxSelection:!0},{headerName:"Username",field:"username",filter:!0,width:175,cellRenderer:function(e){return"<span class='avatar'><img src='"+e.data.avatar+"' height='32' width='32'></span>"+e.value}},{headerName:"Email",field:"email",filter:!0,width:225},{headerName:"Name",field:"name",filter:!0,width:200},{headerName:"Country",field:"country",filter:!0,width:150},{headerName:"Role",field:"role",filter:!0,width:150},{headerName:"Status",field:"status",filter:!0,width:150,cellRenderer:function(e){return"active"==e.value?"<div class='badge badge-pill badge-light-"+"success"+"' >"+e.value+"</div>":"blocked"==e.value?"<div class='badge badge-pill badge-light-"+"danger"+"' >"+e.value+"</div>":"deactivated"==e.value?"<div class='badge badge-pill badge-light-"+"warning"+"' >"+e.value+"</div>":void 0},cellStyle:{"text-align":"center"}},{headerName:"Verified",field:"is_verified",filter:!0,width:125,cellRenderer:function(e){return 1==e.value?"<div class='bullet bullet-sm bullet-"+"success"+"' ></div>":0==e.value?"<div class='bullet bullet-sm bullet-"+"secondary"+"' ></div>":void 0},cellStyle:{"text-align":"center"}},{headerName:"Department",field:"department",filter:!0,width:150},{headerName:"Actions",field:"transactions",width:150,cellRenderer:function(e){var t=document.createElement("span"),i=document.createElement("i"),a=document.createAttribute("class");return a.value="users-delete-icon feather icon-trash-2",i.setAttributeNode(a),i.addEventListener("click",function(){deleteArr=[e.data],l.api.updateRowData({remove:deleteArr})}),t.appendChild($.parseHTML("<a href='app-user-edit.html'><i class= 'users-edit-icon feather icon-edit-1 mr-50'></i></a>")[0]),t.appendChild(i),t}}],rowSelection:"multiple",floatingFilter:!0,filter:!0,pagination:!0,paginationPageSize:20,pivotPanelShow:"always",colResizeDefault:"shift",animateRows:!0,resizable:!0};if(document.getElementById("myGrid")){var e=document.getElementById("myGrid");agGrid.simpleHttpRequest({url:"../../../app-assets/data/users-list.json"}).then(function(e){l.api.setRowData(e)}),$(".ag-grid-filter").on("keyup",function(){!function(e){l.api.setQuickFilter(e)}($(this).val())}),$(".sort-dropdown .dropdown-item").on("click",function(){var e=$(this);!function(e){l.api.paginationSetPageSize(Number(e))}(e.text()),$(".filter-btn").text("1 - "+e.text()+" of 50")}),$(".ag-grid-export-btn").on("click",function(e){l.api.exportDataAsCsv()});function t(e,t){var i=null;"all"!==t&&(i={type:"equals",filter:t}),l.api.getFilterInstance(e).setModel(i),l.api.onFilterChanged()}$("#users-list-role").on("change",function(){var e=$("#users-list-role").val();t("role",e)}),$("#users-list-verified").on("change",function(){var e=$("#users-list-verified").val();t("is_verified",e)}),$("#users-list-status").on("change",function(){var e=$("#users-list-status").val();t("status",e)}),$("#users-list-department").on("change",function(){var e=$("#users-list-department").val();t("department",e)}),$(".users-data-filter").click(function(){$("#users-list-role").prop("selectedIndex",0),$("#users-list-role").change(),$("#users-list-status").prop("selectedIndex",0),$("#users-list-status").change(),$("#users-list-verified").prop("selectedIndex",0),$("#users-list-verified").change(),$("#users-list-department").prop("selectedIndex",0),$("#users-list-department").change()}),new agGrid.Grid(e,l)}0<$("#users-language-select2").length&&$("#users-language-select2").select2({dropdownAutoWidth:!0,width:"100%"}),0<$("#users-music-select2").length&&$("#users-music-select2").select2({dropdownAutoWidth:!0,width:"100%"}),0<$("#users-movies-select2").length&&$("#users-movies-select2").select2({dropdownAutoWidth:!0,width:"100%"}),0<$(".birthdate-picker").length&&$(".birthdate-picker").pickadate({format:"mmmm, d, yyyy"}),0<$(".users-edit").length&&$("input,select,textarea").not("[type=submit]").jqBootstrapValidation()});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 17 - bootstrap-toast.js
+---------------------------
+
+$('.toast-toggler').on('click', function () {
+  $(this).next('.toast').prependTo('.toast-bs-container .toast-position').toast('show')
+
+  // if ($('.toast-bs-container .toast-position .toast').hasClass('hide')) {
+  //   $('.toast-bs-container .toast-position .toast').toast('show')
+  // }
+});
+
+$('.placement').on('click', function () {
+  $('.toast-placement').toast('show');
+  $('.toast-placement .toast').toast('show');
+});
+
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 18 - bootstrap-toast.min.js
+---------------------------
+
+$(".toast-toggler").on("click",function(){$(this).next(".toast").prependTo(".toast-bs-container .toast-position").toast("show")}),$(".placement").on("click",function(){$(".toast-placement").toast("show"),$(".toast-placement .toast").toast("show")});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 19 - coming-soon.js
+---------------------------
+
+/*=========================================================================================
+    File Name: page-coming-soon.js
+    Description: Coming Soon
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+/*******************************
+*       js of Countdown        *
+********************************/
+
+$(document).ready(function() {
+
+  var todayDate = new Date();
+  var releaseDate = new Date(todayDate.setDate(todayDate.getDate()+5));
+
+  var dd = releaseDate.getDate();
+  var mm = releaseDate.getMonth() + 1;
+  var yy = releaseDate.getFullYear();
+  var releaseDate = yy + "/" + mm + "/" + dd;
+
+
+  $('#clockFlat').countdown(releaseDate).on('update.countdown', function(event) {
+    var $this = $(this).html(event.strftime('<div class="clockCard px-1"> <span>%d</span> <br> <p class="bg-amber clockFormat lead px-1 black"> Day%!d </p> </div>'
+      + '<div class="clockCard px-1"> <span>%H</span> <br> <p class="bg-amber clockFormat lead px-1 black"> Hour%!H </p> </div>'
+      + '<div class="clockCard px-1"> <span>%M</span> <br> <p class="bg-amber clockFormat lead px-1 black"> Minute%!M </p> </div>'
+      + '<div class="clockCard px-1"> <span>%S</span> <br> <p class="bg-amber clockFormat lead px-1 black"> Second%!S </p> </div>'))
+  });
+
+
+});
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 20 - coming-soon.min.js
+---------------------------
+
+$(document).ready(function(){var a=new Date,c=(e=new Date(a.setDate(a.getDate()+5))).getDate(),l=e.getMonth()+1,e=e.getFullYear()+"/"+l+"/"+c;$("#clockFlat").countdown(e).on("update.countdown",function(a){$(this).html(a.strftime('<div class="clockCard px-1"> <span>%d</span> <br> <p class="bg-amber clockFormat lead px-1 black"> Day%!d </p> </div><div class="clockCard px-1"> <span>%H</span> <br> <p class="bg-amber clockFormat lead px-1 black"> Hour%!H </p> </div><div class="clockCard px-1"> <span>%M</span> <br> <p class="bg-amber clockFormat lead px-1 black"> Minute%!M </p> </div><div class="clockCard px-1"> <span>%S</span> <br> <p class="bg-amber clockFormat lead px-1 black"> Second%!S </p> </div>'))})});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 21 - content-sidebar.js
+---------------------------
+
+/*=========================================================================================
+    File Name: content-sidebar.js
+    Description: Invoices list datables configurations
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+$(document).ready(function() {
+    /***********************************
+    *        js of small Slider        *
+    ************************************/
+
+    var sm_options = {
+        start: [30,70],
+        behaviour: 'drag',
+        connect: true,
+        range: {
+            'min': 20,
+            'max': 80
+        }
+    };
+    var smallSlider = document.getElementById('small-slider');
+    noUiSlider.create(smallSlider, sm_options);
+
+
+    /*************************************
+    *        Default Score Rating        *
+    **************************************/
+    $.fn.raty.defaults.path = '../../../app-assets/images/raty/';
+
+    $('#score-rating').raty({
+        score: 3
+    });
+
+    if($(".sidebar-sticky").length){
+        var headerNavbarHeight,
+            footerNavbarHeight;
+
+        // Header & Footer offset only for right & left sticky sidebar
+        if($("body").hasClass('content-right-sidebar') || $("body").hasClass('content-left-sidebar')){
+            headerNavbarHeight = $('.header-navbar').height();
+            footerNavbarHeight = $('footer.footer').height();
+        }
+        // Header & Footer offset with padding for detached right & left dsticky sidebar
+        else{
+            headerNavbarHeight = $('.header-navbar').height()+24;
+            footerNavbarHeight = $('footer.footer').height()+10;
+        }
+
+        $(".sidebar-sticky").sticky({
+            topSpacing: headerNavbarHeight,
+            bottomSpacing: footerNavbarHeight
+        });
+
+    }
+});
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 22 - content-sidebar.min.js
+---------------------------
+
+$(document).ready(function(){var e,t,a=document.getElementById("small-slider");noUiSlider.create(a,{start:[30,70],behaviour:"drag",connect:!0,range:{min:20,max:80}}),$.fn.raty.defaults.path="../../../app-assets/images/raty/",$("#score-rating").raty({score:3}),$(".sidebar-sticky").length&&(t=$("body").hasClass("content-right-sidebar")||$("body").hasClass("content-left-sidebar")?(e=$(".header-navbar").height(),$("footer.footer").height()):(e=$(".header-navbar").height()+24,$("footer.footer").height()+10),$(".sidebar-sticky").sticky({topSpacing:e,bottomSpacing:t}))});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 23 - dashboard-analytics.js
+---------------------------
+
+/*=========================================================================================
+    File Name: dashboard-analytics.js
+    Description: dashboard analytics page content with Apexchart Examples
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+$(window).on("load", function () {
+
+  var $primary = '#7367F0';
+  var $danger = '#EA5455';
+  var $warning = '#FF9F43';
+  var $info = '#0DCCE1';
+  var $primary_light = '#8F80F9';
+  var $warning_light = '#FFC085';
+  var $danger_light = '#f29292';
+  var $info_light = '#1edec5';
+  var $strok_color = '#b9c3cd';
+  var $label_color = '#e7eef7';
+  var $white = '#fff';
+
+
+  // Subscribers Gained Chart starts //
+  // ----------------------------------
+
+  var gainedChartoptions = {
+    chart: {
+      height: 100,
+      type: 'area',
+      toolbar: {
+        show: false,
+      },
+      sparkline: {
+        enabled: true
+      },
+      grid: {
+        show: false,
+        padding: {
+          left: 0,
+          right: 0
+        }
+      },
+    },
+    colors: [$primary],
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'smooth',
+      width: 2.5
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 0.9,
+        opacityFrom: 0.7,
+        opacityTo: 0.5,
+        stops: [0, 80, 100]
+      }
+    },
+    series: [{
+      name: 'Subscribers',
+      data: [28, 40, 36, 52, 38, 60, 55]
+    }],
+
+    xaxis: {
+      labels: {
+        show: false,
+      },
+      axisBorder: {
+        show: false,
+      }
+    },
+    yaxis: [{
+      y: 0,
+      offsetX: 0,
+      offsetY: 0,
+      padding: { left: 0, right: 0 },
+    }],
+    tooltip: {
+      x: { show: false }
+    },
+  }
+
+  var gainedChart = new ApexCharts(
+    document.querySelector("#subscribe-gain-chart"),
+    gainedChartoptions
+  );
+
+  gainedChart.render();
+
+  // Subscribers Gained Chart ends //
+
+
+
+  // Orders Received Chart starts //
+  // ----------------------------------
+
+  var orderChartoptions = {
+    chart: {
+      height: 100,
+      type: 'area',
+      toolbar: {
+        show: false,
+      },
+      sparkline: {
+        enabled: true
+      },
+      grid: {
+        show: false,
+        padding: {
+          left: 0,
+          right: 0
+        }
+      },
+    },
+    colors: [$warning],
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'smooth',
+      width: 2.5
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 0.9,
+        opacityFrom: 0.7,
+        opacityTo: 0.5,
+        stops: [0, 80, 100]
+      }
+    },
+    series: [{
+      name: 'Orders',
+      data: [10, 15, 8, 15, 7, 12, 8]
+    }],
+
+    xaxis: {
+      labels: {
+        show: false,
+      },
+      axisBorder: {
+        show: false,
+      }
+    },
+    yaxis: [{
+      y: 0,
+      offsetX: 0,
+      offsetY: 0,
+      padding: { left: 0, right: 0 },
+    }],
+    tooltip: {
+      x: { show: false }
+    },
+  }
+
+  var orderChart = new ApexCharts(
+    document.querySelector("#orders-received-chart"),
+    orderChartoptions
+  );
+
+  orderChart.render();
+
+  // Orders Received Chart ends //
+
+
+
+  // Avg Session Chart Starts
+  // ----------------------------------
+
+  var sessionChartoptions = {
+    chart: {
+      type: 'bar',
+      height: 200,
+      sparkline: { enabled: true },
+      toolbar: { show: false },
+    },
+    states: {
+      hover: {
+        filter: 'none'
+      }
+    },
+    colors: [$label_color, $label_color, $primary, $label_color, $label_color, $label_color],
+    series: [{
+      name: 'Sessions',
+      data: [75, 125, 225, 175, 125, 75, 25]
+    }],
+    grid: {
+      show: false,
+      padding: {
+        left: 0,
+        right: 0
+      }
+    },
+
+    plotOptions: {
+      bar: {
+        columnWidth: '45%',
+        distributed: true,
+        endingShape: 'rounded'
+      }
+    },
+    tooltip: {
+      x: { show: false }
+    },
+    xaxis: {
+      type: 'numeric',
+    }
+  }
+
+  var sessionChart = new ApexCharts(
+    document.querySelector("#avg-session-chart"),
+    sessionChartoptions
+  );
+
+  sessionChart.render();
+
+  // Avg Session Chart ends //
+
+
+  // Support Tracker Chart starts
+  // -----------------------------
+
+  var supportChartoptions = {
+    chart: {
+      height: 270,
+      type: 'radialBar',
+    },
+    plotOptions: {
+      radialBar: {
+        size: 150,
+        startAngle: -150,
+        endAngle: 150,
+        offsetY: 20,
+        hollow: {
+          size: '65%',
+        },
+        track: {
+          background: $white,
+          strokeWidth: '100%',
+
+        },
+        dataLabels: {
+          value: {
+            offsetY: 30,
+            color: '#99a2ac',
+            fontSize: '2rem'
+          }
+        }
+      },
+    },
+    colors: [$danger],
+    fill: {
+      type: 'gradient',
+      gradient: {
+        // enabled: true,
+        shade: 'dark',
+        type: 'horizontal',
+        shadeIntensity: 0.5,
+        gradientToColors: [$primary],
+        inverseColors: true,
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 100]
+      },
+    },
+    stroke: {
+      dashArray: 8
+    },
+    series: [83],
+    labels: ['Completed Tickets'],
+
+  }
+
+  var supportChart = new ApexCharts(
+    document.querySelector("#support-tracker-chart"),
+    supportChartoptions
+  );
+
+  supportChart.render();
+
+  // Support Tracker Chart ends
+
+
+  // Product Order Chart starts
+  // -----------------------------
+
+  var productChartoptions = {
+    chart: {
+      height: 325,
+      type: 'radialBar',
+    },
+    colors: [$primary, $warning, $danger],
+    fill: {
+      type: 'gradient',
+      gradient: {
+        // enabled: true,
+        shade: 'dark',
+        type: 'vertical',
+        shadeIntensity: 0.5,
+        gradientToColors: [$primary_light, $warning_light, $danger_light],
+        inverseColors: false,
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 100]
+      },
+    },
+    stroke: {
+      lineCap: 'round'
+    },
+    plotOptions: {
+      radialBar: {
+        size: 165,
+        hollow: {
+          size: '20%'
+        },
+        track: {
+          strokeWidth: '100%',
+          margin: 15,
+        },
+        dataLabels: {
+          name: {
+            fontSize: '18px',
+          },
+          value: {
+            fontSize: '16px',
+          },
+          total: {
+            show: true,
+            label: 'Total',
+
+            formatter: function (w) {
+              // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
+              return 42459
+            }
+          }
+        }
+      }
+    },
+    series: [70, 52, 26],
+    labels: ['Finished', 'Pending', 'Rejected'],
+
+  }
+
+  var productChart = new ApexCharts(
+    document.querySelector("#product-order-chart"),
+    productChartoptions
+  );
+
+  productChart.render();
+
+  // Product Order Chart ends //
+
+
+  // Sales Chart starts
+  // -----------------------------
+
+  var salesChartoptions = {
+    chart: {
+      height: 400,
+      type: 'radar',
+      dropShadow: {
+        enabled: true,
+        blur: 8,
+        left: 1,
+        top: 1,
+        opacity: 0.2
+      },
+      toolbar: {
+        show: false
+      },
+    },
+    toolbar: { show: false },
+    series: [{
+      name: 'Sales',
+      data: [90, 50, 86, 40, 100, 20],
+    }, {
+      name: 'Visit',
+      data: [70, 75, 70, 76, 20, 85],
+    }],
+    stroke: {
+      width: 0
+    },
+    colors: [$primary, $info],
+    plotOptions: {
+      radar: {
+        polygons: {
+          strokeColors: ['#e8e8e8', 'transparent', 'transparent', 'transparent', 'transparent', 'transparent'],
+          connectorColors: 'transparent'
+        }
+      }
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shade: 'dark',
+        gradientToColors: ['#9f8ed7', $info_light],
+        shadeIntensity: 1,
+        type: 'horizontal',
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 100, 100, 100]
+      },
+    },
+    markers: {
+      size: 0,
+    },
+    legend: {
+      show: true,
+      position: 'top',
+      horizontalAlign: 'left',
+      fontSize: '16px',
+      markers: {
+        width: 10,
+        height: 10,
+      }
+    },
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    dataLabels: {
+      style: {
+        colors: [$strok_color, $strok_color, $strok_color, $strok_color, $strok_color, $strok_color]
+      }
+    },
+    yaxis: {
+      show: false,
+    },
+    grid: {
+      show: false,
+    },
+
+  }
+
+  var salesChart = new ApexCharts(
+    document.querySelector("#sales-chart"),
+    salesChartoptions
+  );
+
+  salesChart.render();
+
+  // Sales Chart ends //
+
+  /***** TOUR ******/
+  var tour = new Shepherd.Tour({
+    classes: 'shadow-md bg-purple-dark',
+    scrollTo: true
+  })
+
+  // tour steps
+  tour.addStep('step-1', {
+    text: 'Toggle Collapse Sidebar.',
+    attachTo: '.modern-nav-toggle .collapse-toggle-icon bottom',
+    buttons: [
+
+      {
+        text: "Skip",
+        action: tour.complete
+      },
+      {
+        text: 'Next',
+        action: tour.next
+      },
+    ]
+  });
+
+  tour.addStep('step-2', {
+    text: 'Create your own bookmarks. You can also re-arrange them using drag & drop.',
+    attachTo: '.bookmark-icons .icon-mail bottom',
+    buttons: [
+
+      {
+        text: "Skip",
+        action: tour.complete
+      },
+
+      {
+        text: "previous",
+        action: tour.back
+      },
+      {
+        text: 'Next',
+        action: tour.next
+      },
+    ]
+  });
+
+  tour.addStep('step-3', {
+    text: 'You can change language from here.',
+    attachTo: '.dropdown-language .flag-icon bottom',
+    buttons: [
+
+      {
+        text: "Skip",
+        action: tour.complete
+      },
+
+      {
+        text: "previous",
+        action: tour.back
+      },
+      {
+        text: 'Next',
+        action: tour.next
+      },
+    ]
+  });
+
+  tour.addStep('step-4', {
+    text: 'Try fuzzy search to visit pages in flash.',
+    attachTo: '.nav-link-search .icon-search bottom',
+    buttons: [
+
+      {
+        text: "Skip",
+        action: tour.complete
+      },
+
+      {
+        text: "previous",
+        action: tour.back
+      },
+      {
+        text: 'Next',
+        action: tour.next
+      },
+    ]
+  });
+
+  tour.addStep('step-5', {
+    text: 'Buy this awesomeness at affordable price!',
+    attachTo: '.buy-now bottom',
+    buttons: [
+
+      {
+        text: "previous",
+        action: tour.back
+      },
+
+      {
+        text: "Finish",
+        action: tour.complete
+      },
+    ]
+  });
+
+  if ($(window).width() > 1200 && !$("body").hasClass("menu-collapsed")) {
+    tour.start()
+  }
+  else {
+    tour.cancel()
+  }
+  if($("body").hasClass("horizontal-menu")){
+    tour.cancel()
+  }
+  $(window).on("resize", function () {
+    tour.cancel()
+  })
+
+});
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 24 - dashboard-analytics.min.js
+---------------------------
+
+$(window).on("load",function(){var e="#7367F0",t="#EA5455",a="#FF9F43",o="#b9c3cd",r="#e7eef7",s={chart:{height:100,type:"area",toolbar:{show:!1},sparkline:{enabled:!0},grid:{show:!1,padding:{left:0,right:0}}},colors:[e],dataLabels:{enabled:!1},stroke:{curve:"smooth",width:2.5},fill:{type:"gradient",gradient:{shadeIntensity:.9,opacityFrom:.7,opacityTo:.5,stops:[0,80,100]}},series:[{name:"Subscribers",data:[28,40,36,52,38,60,55]}],xaxis:{labels:{show:!1},axisBorder:{show:!1}},yaxis:[{y:0,offsetX:0,offsetY:0,padding:{left:0,right:0}}],tooltip:{x:{show:!1}}};new ApexCharts(document.querySelector("#subscribe-gain-chart"),s).render();var n={chart:{height:100,type:"area",toolbar:{show:!1},sparkline:{enabled:!0},grid:{show:!1,padding:{left:0,right:0}}},colors:[a],dataLabels:{enabled:!1},stroke:{curve:"smooth",width:2.5},fill:{type:"gradient",gradient:{shadeIntensity:.9,opacityFrom:.7,opacityTo:.5,stops:[0,80,100]}},series:[{name:"Orders",data:[10,15,8,15,7,12,8]}],xaxis:{labels:{show:!1},axisBorder:{show:!1}},yaxis:[{y:0,offsetX:0,offsetY:0,padding:{left:0,right:0}}],tooltip:{x:{show:!1}}};new ApexCharts(document.querySelector("#orders-received-chart"),n).render();var i={chart:{type:"bar",height:200,sparkline:{enabled:!0},toolbar:{show:!1}},states:{hover:{filter:"none"}},colors:[r,r,e,r,r,r],series:[{name:"Sessions",data:[75,125,225,175,125,75,25]}],grid:{show:!1,padding:{left:0,right:0}},plotOptions:{bar:{columnWidth:"45%",distributed:!0,endingShape:"rounded"}},tooltip:{x:{show:!1}},xaxis:{type:"numeric"}};new ApexCharts(document.querySelector("#avg-session-chart"),i).render();var l={chart:{height:270,type:"radialBar"},plotOptions:{radialBar:{size:150,startAngle:-150,endAngle:150,offsetY:20,hollow:{size:"65%"},track:{background:"#fff",strokeWidth:"100%"},dataLabels:{value:{offsetY:30,color:"#99a2ac",fontSize:"2rem"}}}},colors:[t],fill:{type:"gradient",gradient:{shade:"dark",type:"horizontal",shadeIntensity:.5,gradientToColors:[e],inverseColors:!0,opacityFrom:1,opacityTo:1,stops:[0,100]}},stroke:{dashArray:8},series:[83],labels:["Completed Tickets"]};new ApexCharts(document.querySelector("#support-tracker-chart"),l).render();var d={chart:{height:325,type:"radialBar"},colors:[e,a,t],fill:{type:"gradient",gradient:{shade:"dark",type:"vertical",shadeIntensity:.5,gradientToColors:["#8F80F9","#FFC085","#f29292"],inverseColors:!1,opacityFrom:1,opacityTo:1,stops:[0,100]}},stroke:{lineCap:"round"},plotOptions:{radialBar:{size:165,hollow:{size:"20%"},track:{strokeWidth:"100%",margin:15},dataLabels:{name:{fontSize:"18px"},value:{fontSize:"16px"},total:{show:!0,label:"Total",formatter:function(e){return 42459}}}}},series:[70,52,26],labels:["Finished","Pending","Rejected"]};new ApexCharts(document.querySelector("#product-order-chart"),d).render();var c={chart:{height:400,type:"radar",dropShadow:{enabled:!0,blur:8,left:1,top:1,opacity:.2},toolbar:{show:!1}},toolbar:{show:!1},series:[{name:"Sales",data:[90,50,86,40,100,20]},{name:"Visit",data:[70,75,70,76,20,85]}],stroke:{width:0},colors:[e,"#0DCCE1"],plotOptions:{radar:{polygons:{strokeColors:["#e8e8e8","transparent","transparent","transparent","transparent","transparent"],connectorColors:"transparent"}}},fill:{type:"gradient",gradient:{shade:"dark",gradientToColors:["#9f8ed7","#1edec5"],shadeIntensity:1,type:"horizontal",opacityFrom:1,opacityTo:1,stops:[0,100,100,100]}},markers:{size:0},legend:{show:!0,position:"top",horizontalAlign:"left",fontSize:"16px",markers:{width:10,height:10}},labels:["Jan","Feb","Mar","Apr","May","Jun"],dataLabels:{style:{colors:[o,o,o,o,o,o]}},yaxis:{show:!1},grid:{show:!1}};new ApexCharts(document.querySelector("#sales-chart"),c).render();var p=new Shepherd.Tour({classes:"shadow-md bg-purple-dark",scrollTo:!0});p.addStep("step-1",{text:"Toggle Collapse Sidebar.",attachTo:".modern-nav-toggle .collapse-toggle-icon bottom",buttons:[{text:"Skip",action:p.complete},{text:"Next",action:p.next}]}),p.addStep("step-2",{text:"Create your own bookmarks. You can also re-arrange them using drag & drop.",attachTo:".bookmark-icons .icon-mail bottom",buttons:[{text:"Skip",action:p.complete},{text:"previous",action:p.back},{text:"Next",action:p.next}]}),p.addStep("step-3",{text:"You can change language from here.",attachTo:".dropdown-language .flag-icon bottom",buttons:[{text:"Skip",action:p.complete},{text:"previous",action:p.back},{text:"Next",action:p.next}]}),p.addStep("step-4",{text:"Try fuzzy search to visit pages in flash.",attachTo:".nav-link-search .icon-search bottom",buttons:[{text:"Skip",action:p.complete},{text:"previous",action:p.back},{text:"Next",action:p.next}]}),p.addStep("step-5",{text:"Buy this awesomeness at affordable price!",attachTo:".buy-now bottom",buttons:[{text:"previous",action:p.back},{text:"Finish",action:p.complete}]}),1200<$(window).width()&&!$("body").hasClass("menu-collapsed")?p.start():p.cancel(),$("body").hasClass("horizontal-menu")&&p.cancel(),$(window).on("resize",function(){p.cancel()})});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 25 - dashboard-ecommerce.js
+---------------------------
+
+/*=========================================================================================
+    File Name: dashboard-ecommerce.js
+    Description: dashboard ecommerce page content with Apexchart Examples
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+$(window).on("load", function () {
+
+  var $primary = '#7367F0';
+  var $success = '#28C76F';
+  var $danger = '#EA5455';
+  var $warning = '#FF9F43';
+  var $info = '#00cfe8';
+  var $primary_light = '#A9A2F6';
+  var $danger_light = '#f29292';
+  var $success_light = '#55DD92';
+  var $warning_light = '#ffc085';
+  var $info_light = '#1fcadb';
+  var $strok_color = '#b9c3cd';
+  var $label_color = '#e7e7e7';
+  var $white = '#fff';
+
+
+  // Line Area Chart - 1
+  // ----------------------------------
+
+  var gainedlineChartoptions = {
+    chart: {
+      height: 100,
+      type: 'area',
+      toolbar: {
+        show: false,
+      },
+      sparkline: {
+        enabled: true
+      },
+      grid: {
+        show: false,
+        padding: {
+          left: 0,
+          right: 0
+        }
+      },
+    },
+    colors: [$primary],
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'smooth',
+      width: 2.5
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 0.9,
+        opacityFrom: 0.7,
+        opacityTo: 0.5,
+        stops: [0, 80, 100]
+      }
+    },
+    series: [{
+      name: 'Subscribers',
+      data: [28, 40, 36, 52, 38, 60, 55]
+    }],
+
+    xaxis: {
+      labels: {
+        show: false,
+      },
+      axisBorder: {
+        show: false,
+      }
+    },
+    yaxis: [{
+      y: 0,
+      offsetX: 0,
+      offsetY: 0,
+      padding: { left: 0, right: 0 },
+    }],
+    tooltip: {
+      x: { show: false }
+    },
+  }
+
+  var gainedlineChart = new ApexCharts(
+    document.querySelector("#line-area-chart-1"),
+    gainedlineChartoptions
+  );
+
+  gainedlineChart.render();
+
+
+
+  // Line Area Chart - 2
+  // ----------------------------------
+
+  var revenuelineChartoptions = {
+    chart: {
+      height: 100,
+      type: 'area',
+      toolbar: {
+        show: false,
+      },
+      sparkline: {
+        enabled: true
+      },
+      grid: {
+        show: false,
+        padding: {
+          left: 0,
+          right: 0
+        }
+      },
+    },
+    colors: [$success],
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'smooth',
+      width: 2.5
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 0.9,
+        opacityFrom: 0.7,
+        opacityTo: 0.5,
+        stops: [0, 80, 100]
+      }
+    },
+    series: [{
+      name: 'Revenue',
+      data: [350, 275, 400, 300, 350, 300, 450]
+    }],
+
+    xaxis: {
+      labels: {
+        show: false,
+      },
+      axisBorder: {
+        show: false,
+      }
+    },
+    yaxis: [{
+      y: 0,
+      offsetX: 0,
+      offsetY: 0,
+      padding: { left: 0, right: 0 },
+    }],
+    tooltip: {
+      x: { show: false }
+    },
+  }
+
+  var revenuelineChart = new ApexCharts(
+    document.querySelector("#line-area-chart-2"),
+    revenuelineChartoptions
+  );
+
+  revenuelineChart.render();
+
+
+  // Line Area Chart - 3
+  // ----------------------------------
+
+  var saleslineChartoptions = {
+    chart: {
+      height: 100,
+      type: 'area',
+      toolbar: {
+        show: false,
+      },
+      sparkline: {
+        enabled: true
+      },
+      grid: {
+        show: false,
+        padding: {
+          left: 0,
+          right: 0
+        }
+      },
+    },
+    colors: [$danger],
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'smooth',
+      width: 2.5
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 0.9,
+        opacityFrom: 0.7,
+        opacityTo: 0.5,
+        stops: [0, 80, 100]
+      }
+    },
+    series: [{
+      name: 'Sales',
+      data: [10, 15, 7, 12, 3, 16]
+    }],
+
+    xaxis: {
+      labels: {
+        show: false,
+      },
+      axisBorder: {
+        show: false,
+      }
+    },
+    yaxis: [{
+      y: 0,
+      offsetX: 0,
+      offsetY: 0,
+      padding: { left: 0, right: 0 },
+    }],
+    tooltip: {
+      x: { show: false }
+    },
+  }
+
+  var saleslineChart = new ApexCharts(
+    document.querySelector("#line-area-chart-3"),
+    saleslineChartoptions
+  );
+
+  saleslineChart.render();
+
+  // Line Area Chart - 4
+  // ----------------------------------
+
+  var orderlineChartoptions = {
+    chart: {
+      height: 100,
+      type: 'area',
+      toolbar: {
+        show: false,
+      },
+      sparkline: {
+        enabled: true
+      },
+      grid: {
+        show: false,
+        padding: {
+          left: 0,
+          right: 0
+        }
+      },
+    },
+    colors: [$warning],
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'smooth',
+      width: 2.5
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 0.9,
+        opacityFrom: 0.7,
+        opacityTo: 0.5,
+        stops: [0, 80, 100]
+      }
+    },
+    series: [{
+      name: 'Orders',
+      data: [10, 15, 8, 15, 7, 12, 8]
+    }],
+
+    xaxis: {
+      labels: {
+        show: false,
+      },
+      axisBorder: {
+        show: false,
+      }
+    },
+    yaxis: [{
+      y: 0,
+      offsetX: 0,
+      offsetY: 0,
+      padding: { left: 0, right: 0 },
+    }],
+    tooltip: {
+      x: { show: false }
+    },
+  }
+
+  var orderlineChart = new ApexCharts(
+    document.querySelector("#line-area-chart-4"),
+    orderlineChartoptions
+  );
+
+  orderlineChart.render();
+
+  // revenue-chart Chart
+  // -----------------------------
+
+  var revenueChartoptions = {
+    chart: {
+      height: 270,
+      toolbar: { show: false },
+      type: 'line',
+    },
+    stroke: {
+      curve: 'smooth',
+      dashArray: [0, 8],
+      width: [4, 2],
+    },
+    grid: {
+      borderColor: $label_color,
+    },
+    legend: {
+      show: false,
+    },
+    colors: [$danger_light, $strok_color],
+
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shade: 'dark',
+        inverseColors: false,
+        gradientToColors: [$primary, $strok_color],
+        shadeIntensity: 1,
+        type: 'horizontal',
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 100, 100, 100]
+      },
+    },
+    markers: {
+      size: 0,
+      hover: {
+        size: 5
+      }
+    },
+    xaxis: {
+      labels: {
+        style: {
+          colors: $strok_color,
+        }
+      },
+      axisTicks: {
+        show: false,
+      },
+      categories: ['01', '05', '09', '13', '17', '21', '26', '31'],
+      axisBorder: {
+        show: false,
+      },
+      tickPlacement: 'on',
+    },
+    yaxis: {
+      tickAmount: 5,
+      labels: {
+        style: {
+          color: $strok_color,
+        },
+        formatter: function (val) {
+          return val > 999 ? (val / 1000).toFixed(1) + 'k' : val;
+        }
+      }
+    },
+    tooltip: {
+      x: { show: false }
+    },
+    series: [{
+      name: "This Month",
+      data: [45000, 47000, 44800, 47500, 45500, 48000, 46500, 48600]
+    },
+    {
+      name: "Last Month",
+      data: [46000, 48000, 45500, 46600, 44500, 46500, 45000, 47000]
+    }
+    ],
+
+  }
+
+  var revenueChart = new ApexCharts(
+    document.querySelector("#revenue-chart"),
+    revenueChartoptions
+  );
+
+  revenueChart.render();
+
+
+  // Goal Overview  Chart
+  // -----------------------------
+
+  var goalChartoptions = {
+    chart: {
+      height: 250,
+      type: 'radialBar',
+      sparkline: {
+        enabled: true,
+      },
+      dropShadow: {
+        enabled: true,
+        blur: 3,
+        left: 1,
+        top: 1,
+        opacity: 0.1
+      },
+    },
+    colors: [$success],
+    plotOptions: {
+      radialBar: {
+        size: 110,
+        startAngle: -150,
+        endAngle: 150,
+        hollow: {
+          size: '77%',
+        },
+        track: {
+          background: $strok_color,
+          strokeWidth: '50%',
+        },
+        dataLabels: {
+          name: {
+            show: false
+          },
+          value: {
+            offsetY: 18,
+            color: '#99a2ac',
+            fontSize: '4rem'
+          }
+        }
+      }
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shade: 'dark',
+        type: 'horizontal',
+        shadeIntensity: 0.5,
+        gradientToColors: ['#00b5b5'],
+        inverseColors: true,
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 100]
+      },
+    },
+    series: [83],
+    stroke: {
+      lineCap: 'round'
+    },
+
+  }
+
+  var goalChart = new ApexCharts(
+    document.querySelector("#goal-overview-chart"),
+    goalChartoptions
+  );
+
+  goalChart.render();
+
+  // Client Retention Chart
+  // ----------------------------------
+
+  var clientChartoptions = {
+    chart: {
+      stacked: true,
+      type: 'bar',
+      toolbar: { show: false },
+      height: 300,
+    },
+    plotOptions: {
+      bar: {
+        columnWidth: '10%'
+      }
+    },
+    colors: [$primary, $danger],
+    series: [{
+      name: 'New Clients',
+      data: [175, 125, 225, 175, 160, 189, 206, 134, 159, 216, 148, 123]
+    }, {
+      name: 'Retained Clients',
+      data: [-144, -155, -141, -167, -122, -143, -158, -107, -126, -131, -140, -137]
+    }],
+    grid: {
+      borderColor: $label_color,
+      padding: {
+        left: 0,
+        right: 0
+      }
+    },
+    legend: {
+      show: true,
+      position: 'top',
+      horizontalAlign: 'left',
+      offsetX: 0,
+      fontSize: '14px',
+      markers: {
+        radius: 50,
+        width: 10,
+        height: 10,
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    xaxis: {
+      labels: {
+        style: {
+          colors: $strok_color,
+        }
+      },
+      axisTicks: {
+        show: false,
+      },
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      axisBorder: {
+        show: false,
+      },
+    },
+    yaxis: {
+      tickAmount: 5,
+      labels: {
+        style: {
+          color: $strok_color,
+        }
+      }
+    },
+    tooltip: {
+      x: { show: false }
+    },
+  }
+
+  var clientChart = new ApexCharts(
+    document.querySelector("#client-retention-chart"),
+    clientChartoptions
+  );
+
+  clientChart.render();
+
+  // Session Chart
+  // ----------------------------------
+
+  var sessionChartoptions = {
+    chart: {
+      type: 'donut',
+      height: 325,
+      toolbar: {
+        show: false
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    series: [58.6, 34.9, 6.5],
+    legend: { show: false },
+    comparedResult: [2, -3, 8],
+    labels: ['Desktop', 'Mobile', 'Tablet'],
+    stroke: { width: 0 },
+    colors: [$primary, $warning, $danger],
+    fill: {
+      type: 'gradient',
+      gradient: {
+        gradientToColors: [$primary_light, $warning_light, $danger_light]
+      }
+    }
+  }
+
+  var sessionChart = new ApexCharts(
+    document.querySelector("#session-chart"),
+    sessionChartoptions
+  );
+
+  sessionChart.render();
+
+  // Customer Chart
+  // -----------------------------
+
+  var customerChartoptions = {
+    chart: {
+      type: 'pie',
+      height: 330,
+      dropShadow: {
+        enabled: false,
+        blur: 5,
+        left: 1,
+        top: 1,
+        opacity: 0.2
+      },
+      toolbar: {
+        show: false
+      }
+    },
+    labels: ['New', 'Returning', 'Referrals'],
+    series: [690, 258, 149],
+    dataLabels: {
+      enabled: false
+    },
+    legend: { show: false },
+    stroke: {
+      width: 5
+    },
+    colors: [$primary, $warning, $danger],
+    fill: {
+      type: 'gradient',
+      gradient: {
+        gradientToColors: [$primary_light, $warning_light, $danger_light]
+      }
+    }
+  }
+
+  var customerChart = new ApexCharts(
+    document.querySelector("#customer-chart"),
+    customerChartoptions
+  );
+
+  customerChart.render();
+
+});
+
+
+// Chat Application
+(function ($) {
+  "use strict";
+  // Chat area
+  if ($('.chat-application .user-chats').length > 0) {
+    var chat_user = new PerfectScrollbar(".user-chats", { wheelPropagation: false });
+  }
+
+})(jQuery);
+
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 26 - dashboard-ecommerce.min.js
+---------------------------
+
+$(window).on("load",function(){var e="#7367F0",t="#28C76F",a="#EA5455",o="#FF9F43",r="#A9A2F6",s="#f29292",i="#ffc085",l="#b9c3cd",n="#e7e7e7",d={chart:{height:100,type:"area",toolbar:{show:!1},sparkline:{enabled:!0},grid:{show:!1,padding:{left:0,right:0}}},colors:[e],dataLabels:{enabled:!1},stroke:{curve:"smooth",width:2.5},fill:{type:"gradient",gradient:{shadeIntensity:.9,opacityFrom:.7,opacityTo:.5,stops:[0,80,100]}},series:[{name:"Subscribers",data:[28,40,36,52,38,60,55]}],xaxis:{labels:{show:!1},axisBorder:{show:!1}},yaxis:[{y:0,offsetX:0,offsetY:0,padding:{left:0,right:0}}],tooltip:{x:{show:!1}}};new ApexCharts(document.querySelector("#line-area-chart-1"),d).render();var h={chart:{height:100,type:"area",toolbar:{show:!1},sparkline:{enabled:!0},grid:{show:!1,padding:{left:0,right:0}}},colors:[t],dataLabels:{enabled:!1},stroke:{curve:"smooth",width:2.5},fill:{type:"gradient",gradient:{shadeIntensity:.9,opacityFrom:.7,opacityTo:.5,stops:[0,80,100]}},series:[{name:"Revenue",data:[350,275,400,300,350,300,450]}],xaxis:{labels:{show:!1},axisBorder:{show:!1}},yaxis:[{y:0,offsetX:0,offsetY:0,padding:{left:0,right:0}}],tooltip:{x:{show:!1}}};new ApexCharts(document.querySelector("#line-area-chart-2"),h).render();var c={chart:{height:100,type:"area",toolbar:{show:!1},sparkline:{enabled:!0},grid:{show:!1,padding:{left:0,right:0}}},colors:[a],dataLabels:{enabled:!1},stroke:{curve:"smooth",width:2.5},fill:{type:"gradient",gradient:{shadeIntensity:.9,opacityFrom:.7,opacityTo:.5,stops:[0,80,100]}},series:[{name:"Sales",data:[10,15,7,12,3,16]}],xaxis:{labels:{show:!1},axisBorder:{show:!1}},yaxis:[{y:0,offsetX:0,offsetY:0,padding:{left:0,right:0}}],tooltip:{x:{show:!1}}};new ApexCharts(document.querySelector("#line-area-chart-3"),c).render();var p={chart:{height:100,type:"area",toolbar:{show:!1},sparkline:{enabled:!0},grid:{show:!1,padding:{left:0,right:0}}},colors:[o],dataLabels:{enabled:!1},stroke:{curve:"smooth",width:2.5},fill:{type:"gradient",gradient:{shadeIntensity:.9,opacityFrom:.7,opacityTo:.5,stops:[0,80,100]}},series:[{name:"Orders",data:[10,15,8,15,7,12,8]}],xaxis:{labels:{show:!1},axisBorder:{show:!1}},yaxis:[{y:0,offsetX:0,offsetY:0,padding:{left:0,right:0}}],tooltip:{x:{show:!1}}};new ApexCharts(document.querySelector("#line-area-chart-4"),p).render();var g={chart:{height:270,toolbar:{show:!1},type:"line"},stroke:{curve:"smooth",dashArray:[0,8],width:[4,2]},grid:{borderColor:n},legend:{show:!1},colors:[s,l],fill:{type:"gradient",gradient:{shade:"dark",inverseColors:!1,gradientToColors:[e,l],shadeIntensity:1,type:"horizontal",opacityFrom:1,opacityTo:1,stops:[0,100,100,100]}},markers:{size:0,hover:{size:5}},xaxis:{labels:{style:{colors:l}},axisTicks:{show:!1},categories:["01","05","09","13","17","21","26","31"],axisBorder:{show:!1},tickPlacement:"on"},yaxis:{tickAmount:5,labels:{style:{color:l},formatter:function(e){return 999<e?(e/1e3).toFixed(1)+"k":e}}},tooltip:{x:{show:!1}},series:[{name:"This Month",data:[45e3,47e3,44800,47500,45500,48e3,46500,48600]},{name:"Last Month",data:[46e3,48e3,45500,46600,44500,46500,45e3,47e3]}]};new ApexCharts(document.querySelector("#revenue-chart"),g).render();var y={chart:{height:250,type:"radialBar",sparkline:{enabled:!0},dropShadow:{enabled:!0,blur:3,left:1,top:1,opacity:.1}},colors:[t],plotOptions:{radialBar:{size:110,startAngle:-150,endAngle:150,hollow:{size:"77%"},track:{background:l,strokeWidth:"50%"},dataLabels:{name:{show:!1},value:{offsetY:18,color:"#99a2ac",fontSize:"4rem"}}}},fill:{type:"gradient",gradient:{shade:"dark",type:"horizontal",shadeIntensity:.5,gradientToColors:["#00b5b5"],inverseColors:!0,opacityFrom:1,opacityTo:1,stops:[0,100]}},series:[83],stroke:{lineCap:"round"}};new ApexCharts(document.querySelector("#goal-overview-chart"),y).render();var w={chart:{stacked:!0,type:"bar",toolbar:{show:!1},height:300},plotOptions:{bar:{columnWidth:"10%"}},colors:[e,a],series:[{name:"New Clients",data:[175,125,225,175,160,189,206,134,159,216,148,123]},{name:"Retained Clients",data:[-144,-155,-141,-167,-122,-143,-158,-107,-126,-131,-140,-137]}],grid:{borderColor:n,padding:{left:0,right:0}},legend:{show:!0,position:"top",horizontalAlign:"left",offsetX:0,fontSize:"14px",markers:{radius:50,width:10,height:10}},dataLabels:{enabled:!1},xaxis:{labels:{style:{colors:l}},axisTicks:{show:!1},categories:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],axisBorder:{show:!1}},yaxis:{tickAmount:5,labels:{style:{color:l}}},tooltip:{x:{show:!1}}};new ApexCharts(document.querySelector("#client-retention-chart"),w).render();var b={chart:{type:"donut",height:325,toolbar:{show:!1}},dataLabels:{enabled:!1},series:[58.6,34.9,6.5],legend:{show:!1},comparedResult:[2,-3,8],labels:["Desktop","Mobile","Tablet"],stroke:{width:0},colors:[e,o,a],fill:{type:"gradient",gradient:{gradientToColors:[r,i,s]}}};new ApexCharts(document.querySelector("#session-chart"),b).render();var f={chart:{type:"pie",height:330,dropShadow:{enabled:!1,blur:5,left:1,top:1,opacity:.2},toolbar:{show:!1}},labels:["New","Returning","Referrals"],series:[690,258,149],dataLabels:{enabled:!1},legend:{show:!1},stroke:{width:5},colors:[e,o,a],fill:{type:"gradient",gradient:{gradientToColors:[r,i,s]}}};new ApexCharts(document.querySelector("#customer-chart"),f).render()}),function(){"use strict";if(0<jQuery(".chat-application .user-chats").length)new PerfectScrollbar(".user-chats",{wheelPropagation:!1})}();
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 27 - faq-kb.js
+---------------------------
+
+/*=========================================================================================
+    File Name: app-todo.js
+    Description: app-todo
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+$(function() {
+  "use strict";
+
+  // Filter
+  $("#searchbar").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    if(value!=""){
+      $(".search-content-info .search-content").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
+      var search_row = $(".search-content-info .search-content:visible").length;
+
+      //Check if search-content has row or not
+      if ( search_row == 0 ){
+        $('.search-content-info .no-result').removeClass('no-items');
+      }
+      else{
+        if(!$('.search-content-info .no-result').hasClass('no-items') ){
+          $('.search-content-info .no-result').addClass('no-items');
+        }
+      }
+    }
+    else {
+      // If filter box is empty
+      $(".search-content-info .search-content").show();
+      if ($('.search-content-info .no-results').hasClass('no-items')) {
+        $('.search-content-info .no-results').removeClass('no-items');
+      }
+    }
+  });
+
+});
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 28 - faq-kb.min.js
+---------------------------
+
+$(function(){"use strict";$("#searchbar").on("keyup",function(){var e=$(this).val().toLowerCase();""!=e?($(".search-content-info .search-content").filter(function(){$(this).toggle(-1<$(this).text().toLowerCase().indexOf(e))}),0==$(".search-content-info .search-content:visible").length?$(".search-content-info .no-result").removeClass("no-items"):$(".search-content-info .no-result").hasClass("no-items")||$(".search-content-info .no-result").addClass("no-items")):($(".search-content-info .search-content").show(),$(".search-content-info .no-results").hasClass("no-items")&&$(".search-content-info .no-results").removeClass("no-items"))})});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 29 - invoice.js
+---------------------------
+
+// =========================================================================================
+//     File Name: invoice-template.js
+//     Description: Treeview.
+//     --------------------------------------------------------------------------------------
+//     Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+//     Author: PIXINVENT
+//     Author URL: http://www.themeforest.net/user/pixinvent
+// ==========================================================================================
+
+$(document).ready(function () {
+  // print invoice with button
+  $(".btn-print").click(function () {
+    window.print();
+  });
+});
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 30 - invoice.min.js
+---------------------------
+
+$(document).ready(function(){$(".btn-print").click(function(){window.print()})});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 31 - sk-content-sidebar.js
+---------------------------
+
+/*=========================================================================================
+    File Name: content-sidebar.js
+    Description: Invoices list datables configurations
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+$(document).ready(function() {
+
+    if($(".sidebar-sticky").length){
+        var headerNavbarHeight,
+            footerNavbarHeight;
+
+        // Header & Footer offset only for right & left sticky sidebar
+        if($("body").hasClass('content-right-sidebar') || $("body").hasClass('content-left-sidebar')){
+            headerNavbarHeight = $('.header-navbar').height();
+            footerNavbarHeight = $('footer.footer').height();
+        }
+        // Header & Footer offset with padding for detached right & left dsticky sidebar
+        else{
+            headerNavbarHeight = $('.header-navbar').height()+24;
+            footerNavbarHeight = $('footer.footer').height()+10;
+        }
+
+        $(".sidebar-sticky").sticky({
+            topSpacing: headerNavbarHeight,
+            bottomSpacing: footerNavbarHeight
+        });
+    }
+});
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 32 - sk-content-sidebar.min.js
+---------------------------
+
+$(document).ready(function(){var t,e;$(".sidebar-sticky").length&&(e=$("body").hasClass("content-right-sidebar")||$("body").hasClass("content-left-sidebar")?(t=$(".header-navbar").height(),$("footer.footer").height()):(t=$(".header-navbar").height()+24,$("footer.footer").height()+10),$(".sidebar-sticky").sticky({topSpacing:t,bottomSpacing:e}))});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 33 - user-profile.js
+---------------------------
+
+/*=========================================================================================
+    File Name: user-profile.js
+    Description: User Profile jQuery Plugin Intialization
+    --------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+
+$(document).ready(function(){
+
+  /************************************
+  *     Block Examples      *
+  ************************************/
+    $('.block-element').on('click', function() {
+        var block_ele = $(this);
+        $(block_ele).block({
+            message: '<div class="spinner-border text-primary"></div>',
+            timeout: 2000, //unblock after 2 seconds
+            overlayCSS: {
+                backgroundColor: '#fff',
+                opacity: 0.8,
+                cursor: 'wait'
+            },
+            css: {
+                border: 0,
+                padding: 0,
+                backgroundColor: 'transparent'
+            }
+        });
+    });
+
+    // profile-header-nav toggle
+  $('.navbar-toggler').on('click',function(){
+    $('.navbar-collapse').toggleClass('show');
+    $('.navbar-toggler-icon i').toggleClass('icon-x icon-align-justify');
+  });
+
+});
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 34 - user-profile.min.js
+---------------------------
+
+$(document).ready(function(){$(".block-element").on("click",function(){var o=$(this);$(o).block({message:'<div class="spinner-border text-primary"></div>',timeout:2e3,overlayCSS:{backgroundColor:"#fff",opacity:.8,cursor:"wait"},css:{border:0,padding:0,backgroundColor:"transparent"}})}),$(".navbar-toggler").on("click",function(){$(".navbar-collapse").toggleClass("show"),$(".navbar-toggler-icon i").toggleClass("icon-x icon-align-justify")})});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 35 - user-settings.js
+---------------------------
+
+/*=========================================================================================
+    File Name: user-settings.js
+    Description: User Settings jQuery Plugin Intialization
+    --------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+// profile picture upload
+Dropzone.options.profilePicUpload = {
+  paramName: "file", // The name that will be used to transfer the file
+  maxFiles: 1,
+  init: function () {
+    this.on("maxfilesexceeded", function (file) {
+      this.removeAllFiles();
+      this.addFile(file);
+    });
+  }
+};
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 36 - user-settings.min.js
+---------------------------
+
+Dropzone.options.profilePicUpload={paramName:"file",maxFiles:1,init:function(){this.on("maxfilesexceeded",function(i){this.removeAllFiles(),this.addFile(i)})}};
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 1 - pagination.js
+---------------------------
+
+/*=========================================================================================
+    File Name: pagination.js
+    Description: Provide pagination links for your site or app with the multi-page
+                pagination component.
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: Pixinvent
+    Author URL: hhttp://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+(function (window, document, $) {
+  'use strict';
+  // default pagination
+  $('.page1-links').twbsPagination({
+    totalPages: 5,
+    visiblePages: 4,
+    prev: 'Prev',
+    first: null,
+    last: null,
+    startPage: 2,
+    onPageClick: function (event, page) {
+      $('#page1-content').text('You are on Page ' + page);
+      $(".pagination").find('li').addClass('page-item');
+      $(".pagination").find('a').addClass("page-link");
+    }
+  });
+
+  //Default Pagination with last & first
+  $('.firstLast1-links').twbsPagination({
+    totalPages: 5,
+    visiblePages: 4,
+    prev: 'Prev',
+    first: 'First',
+    last: 'Last',
+    startPage: 2,
+    onPageClick: function (event, page) {
+      $('#firstLast1-content').text('You are on Page ' + page);
+      $(".pagination").find('li').addClass('page-item');
+      $(".pagination").find('a').addClass("page-link");
+    }
+  });
+  //Set Start Page Of Pagination
+  $('.start-links').twbsPagination({
+    totalPages: 10,
+    visiblePages: 6,
+    startPage: 5,
+    prev: 'Prev',
+    first: 'First',
+    last: 'Last',
+    onPageClick: function (event, page) {
+      $('#start-content').text('Your start Page ' + page);
+      $(".pagination").find('li').addClass('page-item');
+      $(".pagination").find('a').addClass("page-link");
+    }
+  });
+
+  // Pagination drop after reload
+  $('.url1-links').twbsPagination({
+    totalPages: 10,
+    visiblePages: 5,
+    prev: 'Prev',
+    first: 'First',
+    last: 'Last',
+    href: '?page={{page}}&#url1-content',
+    hrefVariable: '{{page}}',
+    onPageClick: function (event, page) {
+      $('#url1-content').text('You are on Page ' + page);
+      $(".pagination").find('li').addClass('page-item');
+      $(".pagination").find('a').addClass("page-link");
+    }
+  });
+
+})(window, document, jQuery);
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 2 - pagination.min.js
+---------------------------
+
+!function(a,t,i){"use strict";i(".page1-links").twbsPagination({totalPages:5,visiblePages:4,prev:"Prev",first:null,last:null,startPage:2,onPageClick:function(a,t){i("#page1-content").text("You are on Page "+t),i(".pagination").find("li").addClass("page-item"),i(".pagination").find("a").addClass("page-link")}}),i(".firstLast1-links").twbsPagination({totalPages:5,visiblePages:4,prev:"Prev",first:"First",last:"Last",startPage:2,onPageClick:function(a,t){i("#firstLast1-content").text("You are on Page "+t),i(".pagination").find("li").addClass("page-item"),i(".pagination").find("a").addClass("page-link")}}),i(".start-links").twbsPagination({totalPages:10,visiblePages:6,startPage:5,prev:"Prev",first:"First",last:"Last",onPageClick:function(a,t){i("#start-content").text("Your start Page "+t),i(".pagination").find("li").addClass("page-item"),i(".pagination").find("a").addClass("page-link")}}),i(".url1-links").twbsPagination({totalPages:10,visiblePages:5,prev:"Prev",first:"First",last:"Last",href:"?page={{page}}&#url1-content",hrefVariable:"{{page}}",onPageClick:function(a,t){i("#url1-content").text("You are on Page "+t),i(".pagination").find("li").addClass("page-item"),i(".pagination").find("a").addClass("page-link")}})}(window,document,jQuery);
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 1 - pick-a-datetime.js
+---------------------------
+
+/*=========================================================================================
+    File Name: picker-date-time.js
+    Description: Pick a date/time Picker, Date Range Picker JS
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: Pixinvent
+    Author URL: hhttp://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+(function(window, document, $) {
+    'use strict';
+
+    /*******    Pick-a-date Picker  *****/
+    // Basic date
+    $('.pickadate').pickadate();
+
+    // Format Date Picker
+    $('.format-picker').pickadate({
+        format: 'mmmm, d, yyyy'
+    });
+
+    // Date limits
+    $('.pickadate-limits').pickadate({
+        min: [2019,3,20],
+        max: [2019,5,28]
+    });
+
+    // Disabled Dates & Weeks
+
+    $('.pickadate-disable').pickadate({
+        disable: [
+            1,
+            [2019,3,6],
+            [2019,3,20]
+        ]
+    });
+
+    // Picker Translations
+    $( '.pickadate-translations' ).pickadate({
+        formatSubmit: 'dd/mm/yyyy',
+        monthsFull: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+        monthsShort: [ 'Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec' ],
+        weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
+        today: 'aujourd\'hui',
+        clear: 'clair',
+        close: 'Fermer'
+    });
+
+    // Month Select Picker
+    $('.pickadate-months').pickadate({
+        selectYears: false,
+        selectMonths: true
+    });
+
+    // Month and Year Select Picker
+    $('.pickadate-months-year').pickadate({
+        selectYears: true,
+        selectMonths: true
+    });
+
+    // Short String Date Picker
+    $('.pickadate-short-string').pickadate({
+        weekdaysShort: ['S', 'M', 'Tu', 'W', 'Th', 'F', 'S'],
+        showMonthsShort: true
+    });
+
+    // Change first weekday
+    $('.pickadate-firstday').pickadate({
+        firstDay: 1
+    });
+
+
+
+    /*******    Pick-a-time Picker  *****/
+    // Basic time
+    $('.pickatime').pickatime();
+
+    // Format options
+    $('.pickatime-format').pickatime({
+        // Escape any “rule” characters with an exclamation mark (!).
+        format: 'T!ime selected: h:i a',
+        formatLabel: 'HH:i a',
+        formatSubmit: 'HH:i',
+        hiddenPrefix: 'prefix__',
+        hiddenSuffix: '__suffix'
+    });
+
+
+    // Format options
+    $('.pickatime-formatlabel').pickatime({
+        formatLabel: function(time) {
+            var hours = ( time.pick - this.get('now').pick ) / 60,
+                label = hours < 0 ? ' !hours to now' : hours > 0 ? ' !hours from now' : 'now';
+            return  'h:i a <sm!all>' + ( hours ? Math.abs(hours) : '' ) + label +'</sm!all>';
+        }
+    });
+
+    // Min - Max Time to select
+    $( '.pickatime-min-max').pickatime({
+
+        // Using Javascript
+        min: new Date(2015,3,20,7),
+        max: new Date(2015,7,14,18,30)
+
+        // Using Array
+        // min: [7,30],
+        // max: [14,0]
+    });
+
+    // Intervals
+    $('.pickatime-intervals').pickatime({
+        interval: 150
+    });
+
+    // Disable Time
+    $('.pickatime-disable').pickatime({
+        disable: [
+        // Disable Using Integers
+            3, 5, 7, 13, 17, 21
+
+        /* Using Array */
+            // [0,30],
+            // [2,0],
+            // [8,30],
+            // [9,0]
+        ]
+    });
+
+
+    // Close on a user action
+    $('.pickatime-close-action').pickatime({
+        closeOnSelect: false,
+        closeOnClear: false
+    });
+
+
+})(window, document, jQuery);
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 2 - pick-a-datetime.min.js
+---------------------------
+
+!function(a,e,i){"use strict";i(".pickadate").pickadate(),i(".format-picker").pickadate({format:"mmmm, d, yyyy"}),i(".pickadate-limits").pickadate({min:[2019,3,20],max:[2019,5,28]}),i(".pickadate-disable").pickadate({disable:[1,[2019,3,6],[2019,3,20]]}),i(".pickadate-translations").pickadate({formatSubmit:"dd/mm/yyyy",monthsFull:["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],monthsShort:["Jan","Fev","Mar","Avr","Mai","Juin","Juil","Aou","Sep","Oct","Nov","Dec"],weekdaysShort:["Dim","Lun","Mar","Mer","Jeu","Ven","Sam"],today:"aujourd'hui",clear:"clair",close:"Fermer"}),i(".pickadate-months").pickadate({selectYears:!1,selectMonths:!0}),i(".pickadate-months-year").pickadate({selectYears:!0,selectMonths:!0}),i(".pickadate-short-string").pickadate({weekdaysShort:["S","M","Tu","W","Th","F","S"],showMonthsShort:!0}),i(".pickadate-firstday").pickadate({firstDay:1}),i(".pickatime").pickatime(),i(".pickatime-format").pickatime({format:"T!ime selected: h:i a",formatLabel:"HH:i a",formatSubmit:"HH:i",hiddenPrefix:"prefix__",hiddenSuffix:"__suffix"}),i(".pickatime-formatlabel").pickatime({formatLabel:function(a){var e=(a.pick-this.get("now").pick)/60,i=e<0?" !hours to now":0<e?" !hours from now":"now";return"h:i a <sm!all>"+(e?Math.abs(e):"")+i+"</sm!all>"}}),i(".pickatime-min-max").pickatime({min:new Date(2015,3,20,7),max:new Date(2015,7,14,18,30)}),i(".pickatime-intervals").pickatime({interval:150}),i(".pickatime-disable").pickatime({disable:[3,5,7,13,17,21]}),i(".pickatime-close-action").pickatime({closeOnSelect:!1,closeOnClear:!1})}(window,document,jQuery);
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 1 - popover.js
+---------------------------
+
+/*=========================================================================================
+    File Name: popover.js
+    Description: Popovers are an updated version, which don’t rely on images,
+                use CSS3 for animations, and data-attributes for local title storage.
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+(function(window, document, $) {
+'use strict';
+    $('[data-toggle="popover"]').popover();
+
+
+    /******************/
+    // Popover events //
+    /******************/
+
+    // onShow event
+    $('#show-popover').popover({
+        title: 'Popover Show Event',
+        content: 'Bonbon chocolate cake. Pudding halvah pie apple pie topping marzipan pastry marzipan cupcake.',
+        trigger: 'click',
+        placement: 'right'
+        }).on('show.bs.popover', function() {
+            alert('Show event fired.');
+    });
+
+    // onShown event
+    $('#shown-popover').popover({
+        title: 'Popover Shown Event',
+        content: 'Bonbon chocolate cake. Pudding halvah pie apple pie topping marzipan pastry marzipan cupcake.',
+        trigger: 'click',
+        placement: 'bottom'
+    }).on('shown.bs.popover', function() {
+        alert('Shown event fired.');
+    });
+
+    // onHide event
+    $('#hide-popover').popover({
+        title: 'Popover Hide Event',
+        content: 'Bonbon chocolate cake. Pudding halvah pie apple pie topping marzipan pastry marzipan cupcake.',
+        trigger: 'click',
+        placement: 'bottom'
+    }).on('hide.bs.popover', function() {
+        alert('Hide event fired.');
+    });
+
+    // onHidden event
+    $('#hidden-popover').popover({
+        title: 'Popover Hidden Event',
+        content: 'Bonbon chocolate cake. Pudding halvah pie apple pie topping marzipan pastry marzipan cupcake.',
+        trigger: 'click',
+        placement: 'left'
+    }).on('hidden.bs.popover', function() {
+        alert('Hidden event fired.');
+    });
+
+    /*******************/
+    // Tooltip methods //
+    /*******************/
+
+    // Show method
+    $('#show-method').on('click', function() {
+        $(this).popover('show');
+    });
+    // Hide method
+    $('#hide-method').on('mouseenter', function() {
+        $(this).popover('show');
+    });
+    $('#hide-method').on('click', function() {
+        $(this).popover('hide');
+    });
+    // Toggle method
+    $('#toggle-method').on('click', function() {
+        $(this).popover('toggle');
+    });
+    // Dispose method
+    $('#dispose').on('click', function() {
+        $('#dispose-method').popover('dispose');
+    });
+
+
+    /* Trigger*/
+    $('.manual').on('click', function() {
+        $(this).popover('show');
+    });
+    $('.manual').on('mouseout', function() {
+        $(this).popover('hide');
+    });
+
+    /****************/
+    // Custom color //
+    /****************/
+    $('[data-popup=popover-color]').popover({
+        template: '<div class="popover"><div class="bg-teal"><div class="popover-arrow"></div><div class="popover-inner"></div></div></div>'
+    });
+
+    /**********************/
+    // Custom borer color //
+    /**********************/
+    $('[data-popup=popover-border]').popover({
+        template: '<div class="popover"><div class="border-orange"><div class="popover-arrow"></div><div class="popover-inner"></div></div></div>'
+    });
+
+})(window, document, jQuery);
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 2 - popover.min.js
+---------------------------
+
+!function(o,e,p){"use strict";p('[data-toggle="popover"]').popover(),p("#show-popover").popover({title:"Popover Show Event",content:"Bonbon chocolate cake. Pudding halvah pie apple pie topping marzipan pastry marzipan cupcake.",trigger:"click",placement:"right"}).on("show.bs.popover",function(){alert("Show event fired.")}),p("#shown-popover").popover({title:"Popover Shown Event",content:"Bonbon chocolate cake. Pudding halvah pie apple pie topping marzipan pastry marzipan cupcake.",trigger:"click",placement:"bottom"}).on("shown.bs.popover",function(){alert("Shown event fired.")}),p("#hide-popover").popover({title:"Popover Hide Event",content:"Bonbon chocolate cake. Pudding halvah pie apple pie topping marzipan pastry marzipan cupcake.",trigger:"click",placement:"bottom"}).on("hide.bs.popover",function(){alert("Hide event fired.")}),p("#hidden-popover").popover({title:"Popover Hidden Event",content:"Bonbon chocolate cake. Pudding halvah pie apple pie topping marzipan pastry marzipan cupcake.",trigger:"click",placement:"left"}).on("hidden.bs.popover",function(){alert("Hidden event fired.")}),p("#show-method").on("click",function(){p(this).popover("show")}),p("#hide-method").on("mouseenter",function(){p(this).popover("show")}),p("#hide-method").on("click",function(){p(this).popover("hide")}),p("#toggle-method").on("click",function(){p(this).popover("toggle")}),p("#dispose").on("click",function(){p("#dispose-method").popover("dispose")}),p(".manual").on("click",function(){p(this).popover("show")}),p(".manual").on("mouseout",function(){p(this).popover("hide")}),p("[data-popup=popover-color]").popover({template:'<div class="popover"><div class="bg-teal"><div class="popover-arrow"></div><div class="popover-inner"></div></div></div>'}),p("[data-popup=popover-border]").popover({template:'<div class="popover"><div class="border-orange"><div class="popover-arrow"></div><div class="popover-inner"></div></div></div>'})}(window,document,jQuery);
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 1 - tooltip.js
+---------------------------
+
+/*=========================================================================================
+    File Name: tooltip.js
+    Description: Tooltips are an updated version, which don’t rely on images,
+                use CSS3 for animations, and data-attributes for local title storage.
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: Pixinvent
+    Author URL: hhttp://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+    (function(window, document, $) {
+    'use strict';
+
+    /******************/
+    // Tooltip events //
+    /******************/
+
+    // onShow event
+    $('#show-tooltip').tooltip({
+        title: 'Tooltip Show Event',
+        trigger: 'click',
+        placement: 'right'
+        }).on('show.bs.tooltip', function() {
+            alert('Show event fired.');
+    });
+
+    // onShown event
+    $('#shown-tooltip').tooltip({
+        title: 'Tooltip Shown Event',
+        trigger: 'click',
+        placement: 'top'
+    }).on('shown.bs.tooltip', function() {
+        alert('Shown event fired.');
+    });
+
+    // onHide event
+    $('#hide-tooltip').tooltip({
+        title: 'Tooltip Hide Event',
+        trigger: 'click',
+        placement: 'bottom'
+    }).on('hide.bs.tooltip', function() {
+        alert('Hide event fired.');
+    });
+
+    // onHidden event
+    $('#hidden-tooltip').tooltip({
+        title: 'Tooltip Hidden Event',
+        trigger: 'click',
+        placement: 'left'
+    }).on('hidden.bs.tooltip', function() {
+        alert('Hidden event fired.');
+    });
+
+
+    /*******************/
+    // Tooltip methods //
+    /*******************/
+
+    // Show method
+    $('#show-method').on('click', function() {
+        $(this).tooltip('show');
+    });
+    // Hide method
+    $('#hide-method').on('mouseenter', function() {
+        $(this).tooltip('show');
+    });
+    $('#hide-method').on('click', function() {
+        $(this).tooltip('hide');
+    });
+    // Toggle method
+    $('#toggle-method').on('click', function() {
+        $(this).tooltip('toggle');
+    });
+    // Dispose method
+    $('#dispose').on('click', function() {
+        $('#dispose-method').tooltip('dispose');
+    });
+
+    /* Trigger*/
+    $('.manual').on('click', function() {
+        $(this).tooltip('show');
+    });
+    $('.manual').on('mouseout', function() {
+        $(this).tooltip('hide');
+    });
+
+    /* Default template */
+    $(".template").on('click', function(){
+        console.log(
+            '<div class="tooltip" role="tooltip">' +
+            '<div class="tooltip-arrow"></div>' +
+            '<div class="tooltip-inner"></div>' +
+            '</div>'
+        );
+    });
+
+})(window, document, jQuery);
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 2 - tooltip.min.js
+---------------------------
+
+!function(t,o,i){"use strict";i("#show-tooltip").tooltip({title:"Tooltip Show Event",trigger:"click",placement:"right"}).on("show.bs.tooltip",function(){alert("Show event fired.")}),i("#shown-tooltip").tooltip({title:"Tooltip Shown Event",trigger:"click",placement:"top"}).on("shown.bs.tooltip",function(){alert("Shown event fired.")}),i("#hide-tooltip").tooltip({title:"Tooltip Hide Event",trigger:"click",placement:"bottom"}).on("hide.bs.tooltip",function(){alert("Hide event fired.")}),i("#hidden-tooltip").tooltip({title:"Tooltip Hidden Event",trigger:"click",placement:"left"}).on("hidden.bs.tooltip",function(){alert("Hidden event fired.")}),i("#show-method").on("click",function(){i(this).tooltip("show")}),i("#hide-method").on("mouseenter",function(){i(this).tooltip("show")}),i("#hide-method").on("click",function(){i(this).tooltip("hide")}),i("#toggle-method").on("click",function(){i(this).tooltip("toggle")}),i("#dispose").on("click",function(){i("#dispose-method").tooltip("dispose")}),i(".manual").on("click",function(){i(this).tooltip("show")}),i(".manual").on("mouseout",function(){i(this).tooltip("hide")}),i(".template").on("click",function(){console.log('<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>')})}(window,document,jQuery);
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 1 - data-list-view.js
+---------------------------
+
+/*=========================================================================================
+    File Name: data-list-view.js
+    Description: List View
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+$(document).ready(function() {
+  "use strict"
+  // init list view datatable
+  var dataListView = $(".data-list-view").DataTable({
+    responsive: false,
+    columnDefs: [
+      {
+        orderable: true,
+        targets: 0,
+        checkboxes: { selectRow: true }
+      }
+    ],
+    dom:
+      '<"top"<"actions action-btns"B><"action-filters"lf>><"clear">rt<"bottom"<"actions">p>',
+    oLanguage: {
+      sLengthMenu: "_MENU_",
+      sSearch: ""
+    },
+    aLengthMenu: [[4, 10, 15, 20], [4, 10, 15, 20]],
+    select: {
+      style: "multi"
+    },
+    order: [[1, "asc"]],
+    bInfo: false,
+    pageLength: 4,
+    buttons: [
+      {
+        text: "<i class='feather icon-plus'></i> Add New",
+        action: function() {
+          $(this).removeClass("btn-secondary")
+          $(".add-new-data").addClass("show")
+          $(".overlay-bg").addClass("show")
+          $("#data-name, #data-price").val("")
+          $("#data-category, #data-status").prop("selectedIndex", 0)
+        },
+        className: "btn-outline-primary"
+      }
+    ],
+    initComplete: function(settings, json) {
+      $(".dt-buttons .btn").removeClass("btn-secondary")
+    }
+  });
+
+  dataListView.on('draw.dt', function(){
+    setTimeout(function(){
+      if (navigator.userAgent.indexOf("Mac OS X") != -1) {
+        $(".dt-checkboxes-cell input, .dt-checkboxes").addClass("mac-checkbox")
+      }
+    }, 50);
+  });
+
+  // init thumb view datatable
+  var dataThumbView = $(".data-thumb-view").DataTable({
+    responsive: false,
+    columnDefs: [
+      {
+        orderable: true,
+        targets: 0,
+        checkboxes: { selectRow: true }
+      }
+    ],
+    dom:
+      '<"top"<"actions action-btns"B><"action-filters"lf>><"clear">rt<"bottom"<"actions">p>',
+    oLanguage: {
+      sLengthMenu: "_MENU_",
+      sSearch: ""
+    },
+    aLengthMenu: [[4, 10, 15, 20], [4, 10, 15, 20]],
+    select: {
+      style: "multi"
+    },
+    order: [[1, "asc"]],
+    bInfo: false,
+    pageLength: 4,
+    buttons: [
+      {
+        text: "<i class='feather icon-plus'></i> Add New",
+        action: function() {
+          $(this).removeClass("btn-secondary")
+          $(".add-new-data").addClass("show")
+          $(".overlay-bg").addClass("show")
+        },
+        className: "btn-outline-primary"
+      }
+    ],
+    initComplete: function(settings, json) {
+      $(".dt-buttons .btn").removeClass("btn-secondary")
+    }
+  })
+
+  dataThumbView.on('draw.dt', function(){
+    setTimeout(function(){
+      if (navigator.userAgent.indexOf("Mac OS X") != -1) {
+        $(".dt-checkboxes-cell input, .dt-checkboxes").addClass("mac-checkbox")
+      }
+    }, 50);
+  });
+
+  // To append actions dropdown before add new button
+  var actionDropdown = $(".actions-dropodown")
+  actionDropdown.insertBefore($(".top .actions .dt-buttons"))
+
+
+  // Scrollbar
+  if ($(".data-items").length > 0) {
+    new PerfectScrollbar(".data-items", { wheelPropagation: false })
+  }
+
+  // Close sidebar
+  $(".hide-data-sidebar, .cancel-data-btn, .overlay-bg").on("click", function() {
+    $(".add-new-data").removeClass("show")
+    $(".overlay-bg").removeClass("show")
+    $("#data-name, #data-price").val("")
+    $("#data-category, #data-status").prop("selectedIndex", 0)
+  })
+
+  // On Edit
+  $('.action-edit').on("click",function(e){
+    e.stopPropagation();
+    $('#data-name').val('Altec Lansing - Bluetooth Speaker');
+    $('#data-price').val('$99');
+    $(".add-new-data").addClass("show");
+    $(".overlay-bg").addClass("show");
+  });
+
+  // On Delete
+  $('.action-delete').on("click", function(e){
+    e.stopPropagation();
+    $(this).closest('td').parent('tr').fadeOut();
+  });
+
+  // dropzone init
+  Dropzone.options.dataListUpload = {
+    complete: function(files) {
+      var _this = this
+      // checks files in class dropzone and remove that files
+      $(".hide-data-sidebar, .cancel-data-btn, .actions .dt-buttons").on(
+        "click",
+        function() {
+          $(".dropzone")[0].dropzone.files.forEach(function(file) {
+            file.previewElement.remove()
+          })
+          $(".dropzone").removeClass("dz-started")
+        }
+      )
+    }
+  }
+  Dropzone.options.dataListUpload.complete()
+
+  // mac chrome checkbox fix
+  if (navigator.userAgent.indexOf("Mac OS X") != -1) {
+    $(".dt-checkboxes-cell input, .dt-checkboxes").addClass("mac-checkbox")
+  }
+})
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+File Number - 2 - data-list-view.min.js
+---------------------------
+
+$(document).ready(function(){"use strict";$(".data-list-view").DataTable({responsive:!1,columnDefs:[{orderable:!0,targets:0,checkboxes:{selectRow:!0}}],dom:'<"top"<"actions action-btns"B><"action-filters"lf>><"clear">rt<"bottom"<"actions">p>',oLanguage:{sLengthMenu:"_MENU_",sSearch:""},aLengthMenu:[[4,10,15,20],[4,10,15,20]],select:{style:"multi"},order:[[1,"asc"]],bInfo:!1,pageLength:4,buttons:[{text:"<i class='feather icon-plus'></i> Add New",action:function(){$(this).removeClass("btn-secondary"),$(".add-new-data").addClass("show"),$(".overlay-bg").addClass("show"),$("#data-name, #data-price").val(""),$("#data-category, #data-status").prop("selectedIndex",0)},className:"btn-outline-primary"}],initComplete:function(t,e){$(".dt-buttons .btn").removeClass("btn-secondary")}}).on("draw.dt",function(){setTimeout(function(){-1!=navigator.userAgent.indexOf("Mac OS X")&&$(".dt-checkboxes-cell input, .dt-checkboxes").addClass("mac-checkbox")},50)}),$(".data-thumb-view").DataTable({responsive:!1,columnDefs:[{orderable:!0,targets:0,checkboxes:{selectRow:!0}}],dom:'<"top"<"actions action-btns"B><"action-filters"lf>><"clear">rt<"bottom"<"actions">p>',oLanguage:{sLengthMenu:"_MENU_",sSearch:""},aLengthMenu:[[4,10,15,20],[4,10,15,20]],select:{style:"multi"},order:[[1,"asc"]],bInfo:!1,pageLength:4,buttons:[{text:"<i class='feather icon-plus'></i> Add New",action:function(){$(this).removeClass("btn-secondary"),$(".add-new-data").addClass("show"),$(".overlay-bg").addClass("show")},className:"btn-outline-primary"}],initComplete:function(t,e){$(".dt-buttons .btn").removeClass("btn-secondary")}}).on("draw.dt",function(){setTimeout(function(){-1!=navigator.userAgent.indexOf("Mac OS X")&&$(".dt-checkboxes-cell input, .dt-checkboxes").addClass("mac-checkbox")},50)}),$(".actions-dropodown").insertBefore($(".top .actions .dt-buttons")),0<$(".data-items").length&&new PerfectScrollbar(".data-items",{wheelPropagation:!1}),$(".hide-data-sidebar, .cancel-data-btn, .overlay-bg").on("click",function(){$(".add-new-data").removeClass("show"),$(".overlay-bg").removeClass("show"),$("#data-name, #data-price").val(""),$("#data-category, #data-status").prop("selectedIndex",0)}),$(".action-edit").on("click",function(t){t.stopPropagation(),$("#data-name").val("Altec Lansing - Bluetooth Speaker"),$("#data-price").val("$99"),$(".add-new-data").addClass("show"),$(".overlay-bg").addClass("show")}),$(".action-delete").on("click",function(t){t.stopPropagation(),$(this).closest("td").parent("tr").fadeOut()}),Dropzone.options.dataListUpload={complete:function(t){$(".hide-data-sidebar, .cancel-data-btn, .actions .dt-buttons").on("click",function(){$(".dropzone")[0].dropzone.files.forEach(function(t){t.previewElement.remove()}),$(".dropzone").removeClass("dz-started")})}},Dropzone.options.dataListUpload.complete(),-1!=navigator.userAgent.indexOf("Mac OS X")&&$(".dt-checkboxes-cell input, .dt-checkboxes").addClass("mac-checkbox")});
+
+---------------------------
+
+
+
+
+
+
+
+
+
+

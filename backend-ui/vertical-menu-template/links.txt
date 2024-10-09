@@ -1,0 +1,181 @@
+<head>
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="../../../app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" href="../../../app-assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../../../app-assets/css/colors.css">
+    <link rel="stylesheet" href="../../../app-assets/css/components.css">
+    <link rel="stylesheet" href="../../../app-assets/css/core/colors/palette-gradient.css">
+    <link rel="stylesheet" href="../../../app-assets/css/core/colors/palette-noui.css">
+    <link rel="stylesheet" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/aggrid.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/app-chat.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/app-ecommerce-details.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/app-ecommerce-shop.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/app-email.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/app-todo.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/app-user.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/authentication.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/card-analytics.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/colors.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/coming-soon.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/dashboard-analytics.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/dashboard-ecommerce.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/data-list-view.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/error.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/faq.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/invoice.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/knowledge-base.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/search.css">
+    <link rel="stylesheet" href="../../../app-assets/css/pages/users.css">
+    <link rel="stylesheet" href="../../../app-assets/css/plugins/animate/animate.css">
+    <link rel="stylesheet" href="../../../app-assets/css/plugins/calendars/fullcalendar.css">
+    <link rel="stylesheet" href="../../../app-assets/css/plugins/extensions/context-menu.css">
+    <link rel="stylesheet" href="../../../app-assets/css/plugins/extensions/drag-and-drop.css">
+    <link rel="stylesheet" href="../../../app-assets/css/plugins/extensions/media-plyr.css">
+    <link rel="stylesheet" href="../../../app-assets/css/plugins/extensions/noui-slider.css">
+    <link rel="stylesheet" href="../../../app-assets/css/plugins/extensions/noui-slider.min.css">
+    <link rel="stylesheet" href="../../../app-assets/css/plugins/extensions/swiper.css">
+    <link rel="stylesheet" href="../../../app-assets/css/plugins/extensions/toastr.css">
+    <link rel="stylesheet" href="../../../app-assets/css/plugins/file-uploaders/dropzone.css">
+    <link rel="stylesheet" href="../../../app-assets/css/plugins/forms/validation/form-validation.css">
+    <link rel="stylesheet" href="../../../app-assets/css/plugins/forms/wizard.css">
+    <link rel="stylesheet" href="../../../app-assets/css/plugins/tour/tour.css">
+    <link rel="stylesheet" href="../../../app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" href="../../../app-assets/css/themes/semi-dark-layout.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/animate/animate.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/calendars/extensions/daygrid.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/calendars/extensions/timegrid.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/calendars/fullcalendar.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/charts/apexcharts.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/editors/quill/katex.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/editors/quill/monokai-sublime.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/editors/quill/quill.bubble.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/editors/quill/quill.snow.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/extensions/dragula.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/extensions/jquery.contextMenu.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/extensions/nouislider.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/extensions/plyr.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/extensions/shepherd-theme-default.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/extensions/sweetalert2.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/extensions/swiper.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/extensions/tether-theme-arrows.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/extensions/tether.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/extensions/toastr.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/file-uploaders/dropzone.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/forms/select/select2.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/pickers/pickadate/pickadate.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/tables/ag-grid/ag-grid.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/tables/ag-grid/ag-theme-material.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/ui/prism.min.css">
+    <link rel="stylesheet" href="../../../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="../app-assets/">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600">
+
+    <!-- JavaScript Links -->
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <script src="../../../app-assets/js/scripts/ag-grid/ag-grid.js"></script>
+    <script src="../../../app-assets/js/scripts/cards/card-analytics.js"></script>
+    <script src="../../../app-assets/js/scripts/cards/card-statistics.js"></script>
+    <script src="../../../app-assets/js/scripts/charts/chart-apex.js"></script>
+    <script src="../../../app-assets/js/scripts/charts/chart-chartjs.js"></script>
+    <script src="../../../app-assets/js/scripts/charts/chart-echart.js"></script>
+    <script src="../../../app-assets/js/scripts/charts/gmaps/maps.js"></script>
+    <script src="../../../app-assets/js/scripts/components.js"></script>
+    <script src="../../../app-assets/js/scripts/datatables/datatable.js"></script>
+    <script src="../../../app-assets/js/scripts/editors/editor-quill.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/context-menu.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/copy-to-clipboard.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/drag-drop.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/dropzone.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/fullcalendar.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/i18n.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/media-plyr.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/noui-slider.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/sweet-alerts.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/swiper.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/toastr.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/tour.js"></script>
+    <script src="../../../app-assets/js/scripts/forms/form-tooltip-valid.js"></script>
+    <script src="../../../app-assets/js/scripts/forms/number-input.js"></script>
+    <script src="../../../app-assets/js/scripts/forms/select/form-select2.js"></script>
+    <script src="../../../app-assets/js/scripts/forms/validation/form-validation.js"></script>
+    <script src="../../../app-assets/js/scripts/forms/wizard-steps.js"></script>
+    <script src="../../../app-assets/js/scripts/modal/components-modal.js"></script>
+    <script src="../../../app-assets/js/scripts/navs/navs.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/account-setting.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/app-chat.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/app-ecommerce-details.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/app-ecommerce-shop.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/app-email.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/app-todo.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/app-user.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/bootstrap-toast.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/coming-soon.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/dashboard-analytics.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/faq-kb.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/invoice.js"></script>
+    <script src="../../../app-assets/js/scripts/pages/user-profile.js"></script>
+    <script src="../../../app-assets/js/scripts/pagination/pagination.js"></script>
+    <script src="../../../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
+    <script src="../../../app-assets/js/scripts/popover/popover.js"></script>
+    <script src="../../../app-assets/js/scripts/tooltip/tooltip.js"></script>
+    <script src="../../../app-assets/js/scripts/ui/data-list-view.js"></script>
+    <script src="../../../app-assets/vendors/js/calendar/extensions/daygrid.min.js"></script>
+    <script src="../../../app-assets/vendors/js/calendar/extensions/interactions.min.js"></script>
+    <script src="../../../app-assets/vendors/js/calendar/extensions/timegrid.min.js"></script>
+    <script src="../../../app-assets/vendors/js/calendar/fullcalendar.min.js"></script>
+    <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="../../../app-assets/vendors/js/charts/chart.min.js"></script>
+    <script src="../../../app-assets/vendors/js/charts/echarts/echarts.min.js"></script>
+    <script src="../../../app-assets/vendors/js/charts/gmaps.min.js"></script>
+    <script src="../../../app-assets/vendors/js/coming-soon/jquery.countdown.min.js"></script>
+    <script src="../../../app-assets/vendors/js/editors/quill/highlight.min.js"></script>
+    <script src="../../../app-assets/vendors/js/editors/quill/katex.min.js"></script>
+    <script src="../../../app-assets/vendors/js/editors/quill/quill.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/dragula.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/dropzone.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/jquery.contextMenu.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/jquery.ui.position.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/moment.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/nouislider.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/polyfill.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/shepherd.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/sweetalert2.all.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/swiper.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/tether.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/toastr.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/wNumb.js"></script>
+    <script src="../../../app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+    <script src="../../../app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+    <script src="../../../app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
+    <script src="../../../app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <script src="../../../app-assets/vendors/js/media/plyr.js"></script>
+    <script src="../../../app-assets/vendors/js/media/plyr.polyfilled.js"></script>
+    <script src="../../../app-assets/vendors/js/pagination/jquery.bootpag.min.js"></script>
+    <script src="../../../app-assets/vendors/js/pagination/jquery.twbsPagination.min.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+    <script src="../../../app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/ag-grid/ag-grid-community.min.noStyle.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+    <script src="../../../app-assets/vendors/js/ui/prism.min.js"></script>
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBgjNW0WA93qphgZW-joXVR6VC3IiYFjfo"></script>
+</head>
